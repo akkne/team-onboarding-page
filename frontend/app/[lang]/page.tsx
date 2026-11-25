@@ -49,7 +49,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     ["contact", t.contact],
   ];
   return (
-    <div className="mx-auto w-full max-w-6xl px-6 pb-12 sm:px-12">
+    <div className="mx-auto min-h-screen w-[calc(100%-1rem)] max-w-6xl bg-surface px-4 pb-12 sm:w-[calc(100%-3rem)] sm:px-10">
       <a className="sr-only focus:not-sr-only" href="#main">
         {t.skip}
       </a>
@@ -99,7 +99,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <a
               key={id}
               href={`#${id}`}
-              className="py-2 text-sm font-semibold hover:underline"
+              className="py-2 text-sm font-semibold text-accent hover:underline"
             >
               {label}
             </a>

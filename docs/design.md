@@ -140,36 +140,18 @@ Astryx размещает свои стили в CSS-слоях `@layer reset`, 
 
 - **База:** `extends: neutralTheme` — наследует проверенную 4-пиксельную (`0.25rem`) шкалу отступов, сдержанные радиусы, быструю анимацию (`fast: 125ms`), реестр иконок `lucide-react` и мобильную адаптацию типографики.
 - **Сборка:** `npx @astryxdesign/cli theme build frontend/themes/recessed-maxilla/theme.ts -o frontend/themes/recessed-maxilla/theme.css` — компилирует статический CSS без runtime-инъекции.
-- **Палитра:** сохраняет фирменную светлую и тёмную палитру из текущего `frontend/app/globals.css` (`#f5f6ed` / `#183f34` и `#142620` / `#e3eedf`) и раскладывает её по семантической грамматике Astryx (`architecture:theme-tokens` INV10–INV14).
+- **Палитра.** Внешний фон, основная поверхность и карточки используют отдельные токены Astryx.
 
-### 4.2. Цветовые токены (светлая и тёмная темы)
+### 4.2. Цветовые токены
 
-В таблице указаны кортежи `[light, dark]` (компилируются Astryx в CSS `light-dark(...)`) и расчётный контраст по WCAG 2.2 (нормы проекта и Astryx: ≥ 4.5:1 для текста, ≥ 3:1 для границ контролов и фокуса).
+| Поверхность | Светлая тема | Тёмная тема |
+| --- | --- | --- |
+| Внешний фон | `#2352d6` | `#102568` |
+| Полотно страницы | `#f1f6ff` | `#101e3b` |
+| Карточки | `#ffffff` | `#172950` |
+| Шапка и выбранный язык | `#3045da` | `#9fb9ff` |
 
-| Токен Astryx | Tailwind-класс (через bridge) | Светлая тема (Light) | Тёмная тема (Dark) | Назначение и проверенный контраст |
-| --- | --- | --- | --- | --- |
-| `--color-background-body` | `bg-body` (алиас `bg-canvas`) | `#f5f6ed` | `#142620` | Фон страницы (исходный `--canvas` из `globals.css`) |
-| `--color-background-surface` | `bg-surface` | `#fbfcf7` | `#1b312a` | Основная поверхность и контейнеры |
-| `--color-background-card` | `bg-card` | `#fbfcf7` | `#1b312a` | Фон карточек участников и проектов (мягко приподнят над `body`) |
-| `--color-background-muted` | `bg-muted` | `#eaede0` | `#213a32` | Приглушённая поверхность / фон неактивных меток |
-| `--color-text-primary` | `text-primary` (алиас `text-ink`) | `#183f34` | `#e3eedf` | Основной текст и заголовки (`10.72:1` / `13.23:1` на `body`; `11.32:1` / `11.56:1` на `card`) |
-| `--color-text-secondary` | `text-secondary` | `#3d5e54` | `#a8c2b6` | Девиз, группа, вторичные подписи (`6.59:1` / `8.33:1` на `body`; `6.96:1` / `7.28:1` на `card`; `6.04:1` / `6.44:1` на `muted`) |
-| `--color-text-accent` | `text-accent` | `#183f34` | `#a7e3c9` | Текст ссылок (`10.72:1` на `body` / `9.53:1` на `card` в тёмной; с подчёркиванием для явного отличия от основного текста) |
-| `--color-accent` | `bg-accent-bg` | `#183f34` | `#e3eedf` | Инверсный акцент (активный язык RU/EN, цвет контура фокуса `--focus-outline-color`) |
-| `--color-on-accent` | `text-on-accent` | `#f5f6ed` | `#142620` | Текст на акцентной заливке (`10.72:1` / `13.23:1`) |
-| `--color-neutral` | `bg-neutral` | `#e4e8da` | `#274138` | Фон неинтерактивных меток `Token` / `Badge variant="neutral"` (`9.37:1` / `9.25:1` с `--color-text-primary`) |
-| `--color-border` | `border-border` | `rgba(24, 63, 52, 0.18)` | `rgba(227, 238, 223, 0.18)` | Делители `Divider`, рамки `Card` (соответствует текущему `border-ink/20`) |
-| `--color-border-emphasized` | `border-strong` | `#7a9288` | `#6f8d81` | Выраженные границы элементов (`3.24:1` / `3.82:1` на `card`, ≥ 3:1 по WCAG 1.4.11) |
-| `--color-overlay-hover` | `bg-overlay-hover` | `rgba(24, 63, 52, 0.06)` | `rgba(227, 238, 223, 0.08)` | Подсветка при наведении (`TopNavItem`, ссылки языка) |
-| `--color-overlay-pressed` | `bg-overlay-pressed` | `rgba(24, 63, 52, 0.12)` | `rgba(227, 238, 223, 0.14)` | Состояние нажатия |
-| `--color-background-teal` / `--color-text-teal` | `bg-teal-subtle` / `text-teal-vivid` | `#d5ebe4` / `#114a3f` | `#1f473c` / `#b8efe0` | Метка `Badge variant="teal"` для типа «Проект / Project» (`8.11:1` / `8.13:1`) |
-| `--color-background-gray` / `--color-text-gray` | `bg-gray-subtle` / `text-gray-vivid` | `#e4e8da` / `#183f34` | `#274138` / `#e3eedf` | Метка `Badge variant="neutral"` для типа «Идея / Idea» и меток навыков (`9.37:1` / `9.25:1`) |
-
-**Токены клавиатурного фокуса** (единые для всех компонентов Astryx и кастомных ссылок):
-- `--focus-outline-width: 2px`
-- `--focus-outline-style: solid`
-- `--focus-outline-color: var(--color-accent)` (`10.72:1` в светлой и `13.23:1` в тёмной теме — кратно выше порога 3:1)
-- `--focus-outline-offset: 3px`
+Для текста на акценте применяется `--color-on-accent`. Полный набор токенов хранится в [исходнике темы](../frontend/themes/recessed-maxilla/theme.ts).
 
 ### 4.3. Типографика
 
