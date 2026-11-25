@@ -1,8 +1,15 @@
 import "../globals.css";
-import { Providers } from "./providers";
+import localFont from "next/font/local";
 import { teamName } from "../../data/team";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+const inter = localFont({
+  src: "../assets/inter-variable.woff2",
+  variable: "--font-inter",
+  weight: "100 900",
+  display: "swap",
+});
 
 export const metadata: Metadata = { title: teamName };
 export const dynamicParams = false;
@@ -19,9 +26,9 @@ export default async function Layout({
   if (lang !== "ru" && lang !== "en") notFound();
 
   return (
-    <html lang={lang} data-astryx-theme="recessed-maxilla">
-      <body className="min-h-screen bg-body font-sans text-primary">
-        <Providers lang={lang}>{children}</Providers>
+    <html lang={lang} className={inter.variable}>
+      <body className="min-h-screen bg-ink font-sans text-paper antialiased">
+        {children}
       </body>
     </html>
   );

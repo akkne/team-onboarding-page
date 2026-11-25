@@ -1,22 +1,14 @@
-// Stacked outlines follow the angular jaw in the team's monogram.
+// Folded facets form the M in the team's wordmark.
 export function TeamEmblem() {
   return (
     <svg
       aria-hidden="true"
-      focusable="false"
-      viewBox="0 0 300 180"
-      className="h-full w-full"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
+      viewBox="0 0 48 36"
+      fill="currentColor"
+      className="h-7 w-9"
     >
-      {Array.from({ length: 11 }, (_, row) => (
-        <path
-          key={row}
-          transform={`translate(0 ${row * 5.4})`}
-          d="m22 23 59 29 32-16 37 18 37-18 32 16 59-29-30 52-98 48-98-48Z"
-        />
-      ))}
+      <path d="M0 31 12 5h8L8 31zm14 0L26 5h8L22 31zm14 0L40 5h8L36 31z" />
+      <path d="m12 5 7 15 4-9-3-6zm14 0 7 15 4-9-3-6z" />
     </svg>
   );
 }

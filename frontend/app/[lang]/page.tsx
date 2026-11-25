@@ -1,5 +1,3 @@
-import { Card } from "@astryxdesign/core/Card";
-import { Token } from "@astryxdesign/core/Token";
 import { MemberCard } from "../../components/member-card";
 import { TeamEmblem } from "../../components/team-emblem";
 import { members, team, teamName } from "../../data/team";
@@ -8,184 +6,247 @@ const copy = {
   ru: {
     about: "О команде",
     members: "Участники",
-    skills: "Навыки команды",
+    skills: "Навыки",
     projects: "Проекты",
     contact: "Контакты",
     language: "Язык страницы",
     menu: "Разделы страницы",
-    repo: "Репозиторий на GitHub",
     skip: "Перейти к содержимому",
-    captain: "Написать капитану",
+    round: "Отборочный этап",
+    meet: "Познакомиться с командой",
     project: "Проект",
     idea: "Идея",
-    open: "Открыть проект",
+    view: "Открыть проект",
+    repository: "Репозиторий на GitHub",
+    message: "Написать в GitHub Issues",
   },
   en: {
     about: "About us",
     members: "Members",
-    skills: "Team skills",
+    skills: "Skills",
     projects: "Projects",
     contact: "Contact",
     language: "Page language",
     menu: "Page sections",
-    repo: "GitHub repository",
     skip: "Skip to content",
-    captain: "Contact the captain",
+    round: "Qualifying round",
+    meet: "Meet the team",
     project: "Project",
     idea: "Idea",
-    open: "View project",
+    view: "View project",
+    repository: "GitHub repository",
+    message: "Contact us on GitHub Issues",
   },
 };
-const heading = "mb-6 text-3xl font-semibold tracking-tight";
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const lang = (await params).lang === "en" ? "en" : "ru";
   const t = copy[lang];
   const sections = [
-    ["about", t.about],
+    ["about", lang === "ru" ? "О нас" : t.about],
     ["members", t.members],
     ["skills", t.skills],
     ...(team.projects.length ? [["projects", t.projects]] : []),
     ["contact", t.contact],
   ];
+
   return (
-    <div className="mx-auto min-h-screen w-[calc(100%-1rem)] max-w-6xl bg-surface px-4 pb-12 sm:w-[calc(100%-3rem)] sm:px-10">
-      <a className="sr-only focus:not-sr-only" href="#main">
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-10 focus:bg-paper focus:p-3 focus:text-ink"
+      >
         {t.skip}
       </a>
-      <header>
-        <div className="flex items-center justify-between gap-2 py-5">
-          <span className="font-mono text-sm font-semibold tracking-wide">
-            {team.event[lang]} / {team.year}
-          </span>
+      <header className="border-b border-line bg-ink">
+        <div className="shell flex flex-wrap items-center justify-between gap-x-5 py-3 lg:min-h-18 lg:flex-nowrap">
+          <a
+            href={`/${lang}`}
+            aria-label={teamName}
+            className="flex items-center gap-2 text-[1.5rem] font-semibold tracking-[-0.065em]"
+          >
+            <TeamEmblem />
+            <span lang="en">rm.team</span>
+          </a>
+          <nav
+            aria-label={t.menu}
+            className="order-last mt-3 flex w-full flex-wrap items-center justify-between gap-x-1 border-t border-line pt-1 sm:gap-x-6 lg:order-none lg:mt-0 lg:w-auto lg:border-0 lg:pt-0"
+          >
+            {sections.map(([id, label]) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className="py-2 text-sm font-medium text-muted hover:text-paper"
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
           <nav
             aria-label={t.language}
-            className="flex rounded-lg border border-border p-1"
+            className="flex rounded-full border border-line p-1"
           >
-            {(["ru", "en"] as const).map((l) => (
+            {(["ru", "en"] as const).map((locale) => (
               <a
-                key={l}
-                href={`/${l}`}
-                lang={l}
-                hrefLang={l}
-                aria-label={l === "ru" ? "Русский" : "English"}
-                aria-current={lang === l ? "page" : undefined}
-                className="rounded-md px-3 py-1 text-sm font-semibold hover:underline aria-[current=page]:bg-accent-bg aria-[current=page]:text-on-accent"
+                key={locale}
+                href={`/${locale}`}
+                lang={locale}
+                hrefLang={locale}
+                aria-label={locale === "ru" ? "Русский" : "English"}
+                aria-current={locale === lang ? "page" : undefined}
+                className="rounded-full px-3 py-1.5 text-sm font-medium text-muted hover:text-paper aria-[current=page]:bg-paper aria-[current=page]:text-ink"
               >
-                {l.toUpperCase()}
+                {locale.toUpperCase()}
               </a>
             ))}
           </nav>
         </div>
-        <div className="relative isolate overflow-hidden rounded-xl bg-accent-bg px-6 py-9 text-on-accent sm:flex sm:items-center sm:justify-between sm:gap-6 sm:px-10">
-          <div>
-            <h1
-              lang="en"
-              className="max-w-[12ch] text-on-accent text-5xl leading-[0.95] font-semibold tracking-[-0.055em] sm:text-6xl lg:text-7xl"
-            >
+      </header>
+      <main id="main">
+        <section
+          aria-labelledby="hero-title"
+          className="hero border-b border-line"
+        >
+          <div className="shell flex min-h-[36rem] flex-col items-start pt-12 pb-44 sm:min-h-[40rem] md:justify-center md:py-24 lg:min-h-[clamp(38rem,74svh,54rem)]">
+            <p className="meta mb-7 flex flex-wrap items-center gap-3 text-mint">
+              <span>
+                {team.event[lang]} {team.year}
+              </span>
+              <span aria-hidden="true" className="h-3 w-px bg-mint/50" />
+              {t.round}
+            </p>
+            <h1 id="hero-title" lang="en" className="hero-title">
               {teamName}
             </h1>
-            {team.motto && <p className="mt-3">{team.motto[lang]}</p>}
-          </div>
-          <div className="mt-6 h-20 w-fit sm:mt-0 sm:h-36 lg:h-44">
-            <TeamEmblem />
-          </div>
-        </div>
-        <nav
-          aria-label={t.menu}
-          className="flex flex-wrap gap-x-6 border-b border-border py-3"
-        >
-          {sections.map(([id, label]) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              className="py-2 text-sm font-semibold text-accent hover:underline"
-            >
-              {label}
+            <p className="mt-6 max-w-[30ch] text-xl leading-snug tracking-tight text-paper md:text-2xl">
+              {team.motto[lang]}
+            </p>
+            <a href="#members" className="pill mt-8">
+              {t.meet}
             </a>
-          ))}
-        </nav>
-      </header>
-      <main id="main" className="space-y-12 py-10">
+          </div>
+        </section>
         <section
           id="about"
           aria-labelledby="about-title"
-          className="grid gap-2 md:grid-cols-3"
+          className="border-b border-line"
         >
-          <h2 id="about-title" className={heading}>
-            {t.about}
-          </h2>
-          <p className="max-w-prose text-xl leading-relaxed md:col-span-2">
-            {team.about[lang]}
-          </p>
+          <div className="shell section-space grid items-baseline gap-6 md:grid-cols-[1fr_2fr]">
+            <h2
+              id="about-title"
+              className="meta flex items-center gap-3 text-mint"
+            >
+              <span aria-hidden="true" className="h-px w-8 bg-current" />
+              {t.about}
+            </h2>
+            <p className="max-w-[38ch] text-[clamp(1.55rem,2.7vw,2.75rem)] leading-[1.18] tracking-[-0.045em]">
+              {team.about[lang]}
+            </p>
+          </div>
         </section>
-        <section id="members" aria-labelledby="members-title">
-          <h2 id="members-title" className={heading}>
+        <section
+          id="members"
+          aria-labelledby="members-title"
+          className="shell section-space"
+        >
+          <h2 id="members-title" className="section-title mb-9">
             {t.members}
           </h2>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {members.map((member) => (
               <MemberCard key={member.name.ru} member={member} lang={lang} />
             ))}
           </div>
         </section>
-        <section id="skills" aria-labelledby="skills-title">
-          <h2 id="skills-title" className={heading}>
-            {t.skills}
-          </h2>
-          <div className="grid gap-6 lg:grid-cols-3">
-            {team.skills.map(({ category, items }) => (
-              <div key={category.ru} className="border-t border-border pt-4">
-                <h3 className="mb-3 text-lg font-semibold">{category[lang]}</h3>
-                <ul className="flex flex-wrap gap-2">
-                  {items.map((item) => (
-                    <li key={item}>
-                      <Token label={item} size="sm" />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+        <section
+          id="skills"
+          aria-labelledby="skills-title"
+          className="border-y border-line bg-panel"
+        >
+          <div className="shell section-space grid items-start gap-9 lg:grid-cols-[1fr_2fr]">
+            <h2 id="skills-title" className="section-title">
+              {t.skills}
+            </h2>
+            <dl className="divide-y divide-line border-y border-line">
+              {team.skills.map(({ category, items }) => (
+                <div
+                  key={category.ru}
+                  className="grid gap-3 py-6 sm:grid-cols-[9rem_1fr]"
+                >
+                  <dt className="meta text-mint">{category[lang]}</dt>
+                  <dd>
+                    <ul className="flex flex-wrap gap-x-6 gap-y-1 text-lg tracking-tight md:text-xl">
+                      {items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
         {team.projects.length > 0 && (
-          <section id="projects" aria-labelledby="projects-title">
-            <h2 id="projects-title" className={heading}>
+          <section
+            id="projects"
+            aria-labelledby="projects-title"
+            className="shell section-space"
+          >
+            <h2 id="projects-title" className="section-title mb-9">
               {t.projects}
             </h2>
-            <div className="grid gap-4 md:grid-cols-2">
-              {team.projects.map((p) => (
-                <Card key={p.title.ru} padding={5}>
-                  <Token label={t[p.kind]} size="sm" />
-                  <h3 className="mt-3 text-xl font-semibold">
-                    {p.title[lang]}
-                  </h3>
-                  <p>{p.description[lang]}</p>
-                  {p.href && (
-                    <a href={p.href} className="underline">
-                      {t.open}
-                      <span className="sr-only"> — {p.title[lang]}</span>
-                    </a>
-                  )}
-                </Card>
+            <div className="grid gap-4">
+              {team.projects.map((project) => (
+                <article
+                  key={project.title.ru}
+                  className="grid overflow-hidden rounded-2xl border border-line bg-panel sm:grid-cols-[1fr_2fr]"
+                >
+                  <div
+                    aria-hidden="true"
+                    className="project-emblem grid min-h-32 place-items-center text-ink sm:min-h-64 [&_svg]:h-16 [&_svg]:w-24"
+                  >
+                    <TeamEmblem />
+                  </div>
+                  <div className="flex flex-col items-start justify-center p-6 md:p-10">
+                    <span className="meta text-lilac">{t[project.kind]}</span>
+                    <h3 className="mt-3 text-3xl font-medium tracking-tight">
+                      {project.title[lang]}
+                    </h3>
+                    <p className="mt-3 max-w-prose leading-relaxed text-muted">
+                      {project.description[lang]}
+                    </p>
+                    {project.href && (
+                      <a href={project.href} className="text-link mt-5">
+                        {t.view}
+                        <span className="sr-only">
+                          {" "}
+                          — {project.title[lang]}
+                        </span>
+                      </a>
+                    )}
+                  </div>
+                </article>
               ))}
             </div>
           </section>
         )}
       </main>
-      <footer id="contact" className="border-t border-border pt-8">
-        <h2 className={heading}>{t.contact}</h2>
-        <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
-          {team.captainContact && (
-            <a href={team.captainContact} className="underline">
-              {t.captain}
+      <footer id="contact" className="bg-lilac text-ink">
+        <div className="shell section-space flex flex-wrap items-center justify-between gap-8">
+          <h2 className="section-title">{t.contact}</h2>
+          <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
+            <a
+              href={team.contact}
+              className="pill bg-ink text-paper hover:bg-panel focus-visible:outline-ink"
+            >
+              {t.message}
             </a>
-          )}
-          <a href={team.repository} className="underline underline-offset-4">
-            {t.repo} <span aria-hidden="true">↗</span>
-          </a>
+            <a href={team.repository} className="text-link">
+              {t.repository}
+            </a>
+          </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }

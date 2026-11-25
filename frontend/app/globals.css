@@ -1,15 +1,93 @@
-@layer reset, theme, base, astryx-base, astryx-theme, components, utilities;
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/preflight.css" layer(base);
-@import "@astryxdesign/core/reset.css";
-@import "@astryxdesign/core/astryx.css";
-@import "../themes/recessed-maxilla/built/theme.css";
-@import "@astryxdesign/core/tailwind-theme.css";
-@import "tailwindcss/utilities.css" layer(utilities);
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #08090b;
+  --color-panel: #131417;
+  --color-line: #343439;
+  --color-paper: #f7f6f8;
+  --color-muted: #b7b6bf;
+  --color-lilac: #dfcdf5;
+  --color-mint: #a4f1cf;
+}
+@theme inline {
+  --font-sans: var(--font-inter), Arial, sans-serif;
+}
 
 @layer base {
+  html {
+    color-scheme: dark;
+  }
+  ::selection {
+    background: var(--color-lilac);
+    color: var(--color-ink);
+  }
   a:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 3px;
+    outline: 3px solid currentColor;
+    outline-offset: 4px;
+  }
+  section[id],
+  footer[id] {
+    scroll-margin-top: 1.5rem;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-[90rem] px-5 sm:px-9 lg:px-16 xl:px-20;
+  }
+  .section-space {
+    @apply py-14 md:py-20 lg:py-24;
+  }
+  .section-title {
+    @apply text-[clamp(2.35rem,5vw,4.5rem)] leading-none font-medium tracking-[-0.06em];
+  }
+  .meta {
+    @apply font-mono text-xs leading-5 font-medium tracking-[0.075em] uppercase;
+  }
+  .pill {
+    @apply inline-flex min-h-12 items-center justify-center rounded-full bg-paper px-6 text-base font-medium tracking-tight text-ink transition-colors hover:bg-mint motion-reduce:transition-none;
+  }
+  .pill:focus-visible {
+    outline-color: var(--color-mint);
+  }
+  .text-link {
+    @apply inline-block py-1 text-sm font-medium underline decoration-current/50 underline-offset-4 hover:decoration-current;
+  }
+  .tag {
+    @apply rounded-full border border-line px-3 py-1 text-sm text-muted;
+  }
+  .avatar {
+    @apply grid size-13 shrink-0 place-items-center rounded-full bg-lilac font-mono text-base font-medium text-ink;
+  }
+  .member-card:nth-child(2n) .avatar {
+    @apply bg-mint;
+  }
+  .hero {
+    background-color: #000;
+    background-image: linear-gradient(90deg, #000 0%, #000b 36%, transparent 65%), url("./assets/volga-ribbon.webp");
+    background-size: 100% 100%, cover;
+    background-position: center, center;
+    background-repeat: no-repeat;
+  }
+  .hero-title {
+    @apply max-w-[6em] text-[clamp(3.5rem,8.6vw,8.5rem)] leading-[0.89] font-medium tracking-[-0.062em];
+  }
+  .project-emblem {
+    background:
+      repeating-linear-gradient(
+        120deg,
+        transparent 0 13px,
+        #20142b12 13px 14px
+      ),
+      var(--color-lilac);
+  }
+  @media (max-width: 47.99rem) {
+    .hero {
+      background-size: 100% 100%, auto 64%;
+      background-position: center, 78% bottom;
+      background-image:
+        linear-gradient(to bottom, #000 40%, #000d 48%, transparent 78%),
+        url("./assets/volga-ribbon.webp");
+    }
   }
 }
