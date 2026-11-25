@@ -10,3 +10,5 @@ coverage/
 next-env.d.ts
 npm-debug.log*
 *.pem
+
+/frontend/themes/*/built/
