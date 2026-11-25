@@ -1,4 +1,4 @@
-# Архитектура Team Onboarding
+# Архитектура recessed maxilla team
 
 Next.js App Router генерирует две версии стартовой страницы при сборке. Правило в `frontend/next.config.ts` перенаправляет посетителя с `/` на `/ru`.
 

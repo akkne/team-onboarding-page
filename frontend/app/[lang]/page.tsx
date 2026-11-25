@@ -1,3 +1,5 @@
+import { teamName } from "../team";
+
 const messages = {
   ru: { welcome: "Добро пожаловать в команду!", language: "Язык страницы" },
   en: { welcome: "Welcome to the team!", language: "Page language" },
@@ -10,7 +12,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <main className="mx-auto max-w-5xl px-6 py-8 sm:px-12">
       <header className="flex items-center justify-between gap-3 border-b border-ink/20 pb-5">
-        <span className="font-semibold tracking-tight" lang="en">Team Onboarding</span>
+        <span className="font-semibold tracking-tight" lang="en">{teamName}</span>
         <nav aria-label={copy.language} className="flex gap-1">
           {(["ru", "en"] as const).map((locale) => (
             <a key={locale} href={`/${locale}`} lang={locale} hrefLang={locale}

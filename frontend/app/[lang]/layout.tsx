@@ -1,8 +1,9 @@
+import { teamName } from "../team";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "../globals.css";
 
-export const metadata: Metadata = { title: "Team Onboarding" };
+export const metadata: Metadata = { title: teamName };
 export const dynamicParams = false;
 
 export function generateStaticParams() {
