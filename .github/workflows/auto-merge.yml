@@ -1,0 +1,30 @@
+name: Auto merge
+
+on:
+  workflow_run:
+    workflows: [Verify]
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge:
+    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge checked pull requests from this repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          CHECKED_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          for pr_number in $(gh api "repos/$REPO/actions/runs/$RUN_ID" --jq '.pull_requests[].number'); do
+            details="$(gh api "repos/$REPO/pulls/$pr_number" --jq '[.state, .draft, .base.ref, .head.repo.full_name, .head.sha] | @tsv')"
+            IFS=$'\t' read -r state draft base head_repo head_sha <<< "$details"
+            if [[ "$state" == open && "$draft" == false && "$base" == main && "$head_repo" == "$REPO" && "$head_sha" == "$CHECKED_SHA" ]]; then
+              gh pr merge "$pr_number" --repo "$REPO" --auto --merge --match-head-commit "$CHECKED_SHA"
+            fi
+          done
