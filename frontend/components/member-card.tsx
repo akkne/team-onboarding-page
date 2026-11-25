@@ -1,46 +1,58 @@
-import { Card } from "@astryxdesign/core/Card";
-import { Avatar } from "@astryxdesign/core/Avatar";
-import { Token } from "@astryxdesign/core/Token";
+import Image from "next/image";
 import { team, type Locale, type Member } from "../data/team";
 
 export function MemberCard({ member, lang }: { member: Member; lang: Locale }) {
   const name = member.name[lang];
-  const contact = member.contact ?? team.captainContact;
+  const words = name.split(" ");
+  const initials = words[0][0] + words[lang === "ru" ? 1 : words.length - 1][0];
+  const contactLabel = member.contact
+    ? lang === "ru"
+      ? "Личный контакт"
+      : "Personal contact"
+    : lang === "ru"
+      ? "Через команду"
+      : "Via the team";
+
   return (
-    <Card
-      padding={5}
-      elevation="none"
-      className="h-full rounded-xl border border-border bg-card"
-    >
-      <div className="mb-5 flex items-center justify-between gap-3">
-        <Avatar name={name} src={member.photo} size={48} tooltip={false} />
-        <span className="rounded-md bg-muted px-2 py-1 font-mono text-xs text-secondary">
-          {member.group}
-        </span>
+    <article className="member-card flex h-full flex-col rounded-2xl border border-line bg-panel p-6 lg:p-7">
+      <div className="mb-8 flex items-center justify-between gap-4">
+        {member.photo ? (
+          <Image
+            src={member.photo}
+            alt=""
+            width={52}
+            height={52}
+            unoptimized
+            className="size-13 rounded-full object-cover"
+          />
+        ) : (
+          <span aria-hidden="true" className="avatar">
+            {initials}
+          </span>
+        )}
+        <span className="meta text-muted">{member.group}</span>
       </div>
-      <h3 className="text-xl leading-tight font-semibold">{name}</h3>
-      <p className="mt-2 font-medium">{member.role[lang]}</p>
-      <p className="mt-3 text-sm leading-relaxed text-secondary">
+      <h3 className="max-w-[23ch] text-2xl leading-tight font-medium tracking-tight">
+        {name}
+      </h3>
+      <p className="mt-2 text-lilac">{member.role[lang]}</p>
+      <p className="mt-4 leading-relaxed text-muted">
         {member.contribution[lang]}
       </p>
-      {member.skills?.length ? (
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {member.skills.map((skill) => (
-            <li key={skill}>
-              <Token label={skill} size="sm" />
-            </li>
-          ))}
-        </ul>
-      ) : null}
-      {contact && (
-        <a href={contact} className="mt-4 inline-block underline">
-          {member.contact
-            ? name
-            : lang === "ru"
-              ? "Написать капитану"
-              : "Contact the captain"}
-        </a>
-      )}
-    </Card>
+      <ul className="mt-5 mb-7 flex flex-wrap gap-2">
+        {member.skills.map((skill) => (
+          <li key={skill.ru} className="tag">
+            {skill[lang]}
+          </li>
+        ))}
+      </ul>
+      <a
+        href={member.contact ?? team.contact}
+        className="text-link mt-auto self-start"
+      >
+        {contactLabel}
+        <span className="sr-only"> — {name}</span>
+      </a>
+    </article>
   );
 }

@@ -7,22 +7,14 @@
     "lint": "eslint .",
     "typecheck": "next typegen && tsc --noEmit",
     "build": "next build",
-    "start": "next start",
-    "theme": "astryx theme build themes/recessed-maxilla/theme.ts --out themes/recessed-maxilla/built/theme.css",
-    "prebuild": "npm run theme",
-    "predev": "npm run theme",
-    "pretypecheck": "npm run theme"
+    "start": "next start"
   },
   "dependencies": {
-    "@astryxdesign/core": "0.7.17",
-    "@astryxdesign/theme-neutral": "0.7.17",
-    "@stylexjs/stylex": "0.19.2",
     "next": "16.4.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@astryxdesign/cli": "0.7.17",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^22",
     "@types/react": "^19",
