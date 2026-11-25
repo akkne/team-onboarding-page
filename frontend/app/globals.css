@@ -1,19 +1,15 @@
-@import "tailwindcss";
+@layer reset, theme, base, astryx-base, astryx-theme, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "@astryxdesign/core/reset.css";
+@import "@astryxdesign/core/astryx.css";
+@import "../themes/recessed-maxilla/built/theme.css";
+@import "@astryxdesign/core/tailwind-theme.css";
+@import "tailwindcss/utilities.css" layer(utilities);
 
-:root {
-  color-scheme: light dark;
-  --canvas: #f5f6ed;
-  --ink: #183f34;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --canvas: #142620;
-    --ink: #e3eedf;
+@layer base {
+  a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
   }
-}
-
-@theme inline {
-  --color-canvas: var(--canvas);
-  --color-ink: var(--ink);
 }
