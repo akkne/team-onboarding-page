@@ -70,7 +70,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                 hrefLang={l}
                 aria-label={l === "ru" ? "Русский" : "English"}
                 aria-current={lang === l ? "page" : undefined}
-                className="rounded-md px-3 py-1 text-sm font-semibold hover:underline aria-current:bg-accent-bg aria-current:text-on-accent"
+                className="rounded-md px-3 py-1 text-sm font-semibold hover:underline aria-[current=page]:bg-accent-bg aria-[current=page]:text-on-accent"
               >
                 {l.toUpperCase()}
               </a>
