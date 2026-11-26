@@ -82,6 +82,19 @@
   .hero-action {
     @apply relative order-2;
   }
+  .project-brand {
+    @apply absolute right-4 bottom-4 inline-flex items-center gap-[0.34em] rounded-full border border-[#09318d]/15 bg-white/95 px-4 py-3 text-[#09318d] shadow-lg;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: clamp(1.1rem, 2.8vw, 1.75rem);
+    font-weight: 730;
+    line-height: 1;
+    letter-spacing: -0.065em;
+  }
+  .project-brand-mark {
+    @apply block size-[0.68em] shrink-0 bg-[#f59acc];
+    border-radius: 55% 55% 55% 12%;
+    transform: rotate(-12deg);
+  }
   @media (min-width: 48rem) {
     .hero-layout {
       min-height: max(39rem, calc(100svh - 4.6rem));

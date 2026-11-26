@@ -17,6 +17,9 @@ interface Project {
   title: Translation;
   description: Translation;
   kind: "project" | "idea";
+  image: string;
+  imageAlt: Translation;
+  brand?: "dobropay";
   href?: string;
 }
 
@@ -43,6 +46,11 @@ export const team = {
         en: "Our bilingual site for the Volga.TOP qualifiers brings the team, roles and tools together. Next.js builds both language versions from the same data.",
       },
       kind: "project",
+      image: "/project-previews/team-onboarding.webp",
+      imageAlt: {
+        ru: "Главная страница визитки команды с цветной абстрактной графикой",
+        en: "Team profile homepage with colorful abstract artwork",
+      },
       href: repository,
     },
     {
@@ -52,6 +60,12 @@ export const team = {
         en: "A .NET 10 and Next.js payment gateway with a merchant dashboard and API documentation. Integrations with real payment providers are not implemented yet.",
       },
       kind: "project",
+      image: "/project-previews/dobropay-payments.png",
+      imageAlt: {
+        ru: "Кабинет Dobropay со списком платежей и сводными показателями",
+        en: "Dobropay dashboard with a payment list and summary metrics",
+      },
+      brand: "dobropay",
       href: "https://github.com/akkne/dobropay",
     },
   ] as Project[],
