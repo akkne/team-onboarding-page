@@ -1,7 +1,9 @@
 import type { SpherePose } from "./sphere-motion";
 
 const tau = 2 * Math.PI;
-const starColors = ["#8daeff", "#9cffe6", "#ff966e", "#c1a2ff"];
+const glowFraction = 0.035;
+const starColors = ["#758aff", "#88ebdb", "#ff845e"];
+const rimColors = ["#b4a3ff", "#cb9eaa", "#ff8463", "#b18eac", "#6481ff", "#679cca", "#81d7c7", "#98bfdd"];
 
 function makeGlow(color: string) {
   const sprite = document.createElement("canvas");
@@ -32,26 +34,25 @@ export function createSphereScene(
 
   const glows = starColors.map(makeGlow);
   // Each path shares one paint. Depth bands retain the bright front and the coloured rim.
-  const palette = Array.from({ length: 36 }, (_, index) => {
-    const band = Math.floor(index / 12);
-    const hue = 175 + (index % 12) * 16;
-    return `hsla(${hue}, 78%, ${64 + band * 9}%, ${0.30 + band * 0.18})`;
-  });
-  palette.push("rgba(225,230,255,0.80)");
-  const particles = Array.from({ length: 4200 }, () => {
+  const palette = ["2e", "6b", "ad"].flatMap(alpha =>
+    rimColors.map(color => color + alpha),
+  );
+  const interiorColor = palette.push("rgba(184,194,221,0.22)") - 1;
+  const frontColor = palette.push("rgba(235,238,248,0.80)") - 1;
+  const particles = Array.from({ length: 15000 }, () => {
     const y = random() * 2 - 1;
     const longitude = random() * tau;
     const ring = Math.sqrt(1 - y * y);
     const x = Math.cos(longitude) * ring;
     const z = Math.sin(longitude) * ring;
     const phase = longitude * 5 + y * 9;
-    const shell = 0.972 + 0.019 * Math.sin(phase) + 0.015 * Math.cos(y * 17 + longitude * 3) + random() * 0.025;
-    const hue = 261 + y * 70 + 24 * x + (random() - 0.5) * 34;
+    const kind = random();
+    const interior = kind >= glowFraction && kind < 0.13;
+    const shell = interior ? 0.42 + random() * 0.52 : 0.98 + random() * 0.04;
     return {
-      x: x * shell, y: y * shell, z: z * shell, phase,
-      color: Math.max(0, Math.min(11, Math.round((hue - 175) / 16))),
-      size: 0.0022 + random() ** 2 * 0.0043,
-      glow: random() < 0.022 ? glows[Math.floor(random() * glows.length)] : null,
+      x: x * shell, y: y * shell, z: z * shell, phase, interior,
+      size: 0.0023 + random() * 0.0033,
+      glow: kind < glowFraction ? glows[Math.floor(random() * glows.length)] : null,
     };
   });
 
@@ -70,7 +71,7 @@ export function createSphereScene(
     const cos = Math.cos(angle);
     const sin = Math.sin(angle);
     const tilt = pose.pitch + 0.12 * Math.sin(time * 0.23) - (pose.pointerY - 0.5) * pose.influence * 0.16;
-    const breathing = 0.045 * Math.sin(time * 1.1);
+    const breathing = 0.012 * Math.sin(time * 1.1);
     const width = 1 + pose.stretchX - pose.stretchY * 0.4 + breathing;
     const height = 1 + pose.stretchY - pose.stretchX * 0.4 - breathing;
     const reach = size * 0.23;
@@ -80,7 +81,7 @@ export function createSphereScene(
 
     const paths = palette.map(() => new Path2D());
     // The points are uniformly distributed, so any prefix still covers the whole sphere.
-    const count = Math.min(particles.length, Math.max(2000, Math.round(size * size / 130)));
+    const count = Math.min(particles.length, Math.max(6000, Math.round(size * size / 28)));
     for (let index = 0; index < count; index++) {
       const p = particles[index];
       const z = p.z * cos - p.x * sin;
@@ -88,8 +89,10 @@ export function createSphereScene(
       const wave = 1 + 0.034 * Math.sin(time * 0.95 + p.phase)
         + pose.expansion * (0.2 + p.size * 170);
       const scale = radius * wave / (1 - depth * 0.095);
-      let x = center + (p.x * cos + p.z * sin) * scale * width;
-      let y = center + (p.y * ct - z * st) * scale * height;
+      const surfaceX = p.x * cos + p.z * sin;
+      const surfaceY = p.y * ct - z * st;
+      let x = center + surfaceX * scale * width;
+      let y = center + surfaceY * scale * height;
       if (pose.influence > 0.01) {
         const dx = x - pose.pointerX * size;
         const dy = y - pose.pointerY * size;
@@ -101,14 +104,20 @@ export function createSphereScene(
         }
       }
       const light = (depth + 1) / 2;
-      const dot = Math.max(0.85, radius * p.size * (0.76 + light));
+      const dot = Math.max(0.65, radius * p.size * (0.55 + light));
       if (p.glow) {
-        context.globalAlpha = 0.29 + light * (0.58 + 0.12 * Math.sin(p.phase + time));
+        context.globalAlpha = (0.3 + light * 0.7) * (0.72 + 0.28 * Math.sin(p.phase + time * 2.6));
         const halo = dot * 3.4;
         context.drawImage(p.glow, x - halo, y - halo, halo * 2, halo * 2);
       } else {
         const band = depth < -0.35 ? 0 : depth < 0.1 ? 1 : 2;
-        const color = depth > 0.54 ? palette.length - 1 : p.color + band * 12;
+        let color = frontColor;
+        if (p.interior) {
+          color = interiorColor;
+        } else if (depth < 0.55) {
+          const sector = Math.round(Math.atan2(surfaceY, surfaceX) * rimColors.length / tau);
+          color = band * rimColors.length + (sector + rimColors.length) % rimColors.length;
+        }
         paths[color].rect(x, y, dot, dot);
       }
     }
