@@ -18,7 +18,11 @@ function makeGlow(color: string) {
   return sprite;
 }
 
-export function createSphereScene(context: CanvasRenderingContext2D, labels: HTMLElement[]) {
+export function createSphereScene(
+  context: CanvasRenderingContext2D,
+  slots: HTMLElement[],
+  labels: readonly string[],
+) {
   // A repeatable surface keeps the opening frame stable across locale changes.
   let seed = 4627;
   function random() {
@@ -27,7 +31,14 @@ export function createSphereScene(context: CanvasRenderingContext2D, labels: HTM
   }
 
   const glows = starColors.map(makeGlow);
-  const particles = Array.from({ length: 6200 }, () => {
+  // Each path shares one paint. Depth bands retain the bright front and the coloured rim.
+  const palette = Array.from({ length: 36 }, (_, index) => {
+    const band = Math.floor(index / 12);
+    const hue = 175 + (index % 12) * 16;
+    return `hsla(${hue}, 78%, ${64 + band * 9}%, ${0.30 + band * 0.18})`;
+  });
+  palette.push("rgba(225,230,255,0.80)");
+  const particles = Array.from({ length: 4200 }, () => {
     const y = random() * 2 - 1;
     const longitude = random() * tau;
     const ring = Math.sqrt(1 - y * y);
@@ -38,18 +49,19 @@ export function createSphereScene(context: CanvasRenderingContext2D, labels: HTM
     const hue = 261 + y * 70 + 24 * x + (random() - 0.5) * 34;
     return {
       x: x * shell, y: y * shell, z: z * shell, phase,
-      color: `hsl(${hue} 78% ${65 + random() * 28}%)`,
+      color: Math.max(0, Math.min(11, Math.round((hue - 175) / 16))),
       size: 0.0022 + random() ** 2 * 0.0043,
       glow: random() < 0.022 ? glows[Math.floor(random() * glows.length)] : null,
     };
   });
 
-  const anchors = labels.map((element, index) => {
-    const y = labels.length === 1 ? 0 : 1.3 * ((index + 0.5) / labels.length - 0.5);
-    const ring = Math.sqrt(1 - y * y);
-    const angle = index * 2.4 + 0.3;
-    return { element, x: ring * Math.sin(angle), y, z: ring * Math.cos(angle) };
-  });
+  const anchors = slots.map((element, slot) => ({
+    element,
+    names: labels.filter((_, index) => index % slots.length === slot),
+    latitude: (slot - (slots.length - 1) / 2) * 0.56,
+    longitude: [-0.44, 0.42, -0.32][slot],
+    index: -1,
+  }));
 
   return function draw(size: number, time: number, pose: SpherePose) {
     const radius = size * 0.40;
@@ -66,7 +78,11 @@ export function createSphereScene(context: CanvasRenderingContext2D, labels: HTM
     const st = Math.sin(tilt);
     context.clearRect(0, 0, size, size);
 
-    for (const p of particles) {
+    const paths = palette.map(() => new Path2D());
+    // The points are uniformly distributed, so any prefix still covers the whole sphere.
+    const count = Math.min(particles.length, Math.max(2000, Math.round(size * size / 130)));
+    for (let index = 0; index < count; index++) {
+      const p = particles[index];
       const z = p.z * cos - p.x * sin;
       const depth = z * ct + p.y * st;
       const wave = 1 + 0.034 * Math.sin(time * 0.95 + p.phase)
@@ -85,25 +101,41 @@ export function createSphereScene(context: CanvasRenderingContext2D, labels: HTM
         }
       }
       const light = (depth + 1) / 2;
-      const dot = Math.max(0.55, radius * p.size * (0.68 + light));
-      context.globalAlpha = 0.29 + light * (0.58 + 0.12 * Math.sin(p.phase + time));
+      const dot = Math.max(0.85, radius * p.size * (0.76 + light));
       if (p.glow) {
+        context.globalAlpha = 0.29 + light * (0.58 + 0.12 * Math.sin(p.phase + time));
         const halo = dot * 3.4;
         context.drawImage(p.glow, x - halo, y - halo, halo * 2, halo * 2);
       } else {
-        context.fillStyle = depth > 0.54 ? "#e1e6ff" : p.color;
-        context.fillRect(x, y, dot, dot);
+        const band = depth < -0.35 ? 0 : depth < 0.1 ? 1 : 2;
+        const color = depth > 0.54 ? palette.length - 1 : p.color + band * 12;
+        paths[color].rect(x, y, dot, dot);
       }
     }
     context.globalAlpha = 1;
 
-    for (const anchor of anchors) {
-      const z = anchor.z * cos - anchor.x * sin;
-      const depth = z * ct + anchor.y * st;
-      const scale = radius * 0.78 / (1 - depth * 0.095);
-      anchor.element.style.left = `${center + (anchor.x * cos + anchor.z * sin) * scale * width}px`;
-      anchor.element.style.top = `${center + (anchor.y * ct - z * st) * scale * height}px`;
-      anchor.element.style.opacity = String(Math.min(1, Math.max(0, depth * 5)) * (1 - pose.expansion));
+    for (let index = 0; index < palette.length; index++) {
+      context.fillStyle = palette[index];
+      context.fill(paths[index]);
+    }
+
+    for (const [slot, anchor] of anchors.entries()) {
+      // Switch hemispheres at the silhouette, where the label has faded out.
+      const longitude = angle + anchor.longitude;
+      const side = Math.cos(longitude) < 0 ? -1 : 1;
+      const ring = Math.sqrt(1 - anchor.latitude ** 2);
+      const z = Math.abs(Math.cos(longitude)) * ring;
+      const x = Math.sin(longitude) * side * ring * radius * width * 0.76;
+      const y = (anchor.latitude * ct - z * st) * radius * height * 0.86;
+      const phase = time / 4.8 + slot / 3 + 0.1;
+      const index = Math.floor(phase) % anchor.names.length;
+      if (anchor.index !== index) {
+        anchor.element.textContent = anchor.names[index];
+        anchor.index = index;
+      }
+      const fade = Math.min(1, (phase % 1) * 12, (1 - phase % 1) * 12);
+      anchor.element.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+      anchor.element.style.opacity = String(Math.min(1, z * 5) * fade * (1 - pose.expansion));
     }
   };
 }

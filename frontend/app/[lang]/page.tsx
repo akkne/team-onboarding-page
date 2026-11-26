@@ -1,3 +1,4 @@
+import { getSphereLabels } from "../../data/sphere-labels";
 import { ParticleSphere } from "../../components/particle-sphere";
 import Image from "next/image";
 import { MemberCard } from "../../components/member-card";
@@ -109,7 +110,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           aria-labelledby="hero-title"
           className="hero relative isolate overflow-hidden border-b border-line"
         >
-          <ParticleSphere lang={lang} />
+          <ParticleSphere labels={getSphereLabels(lang)} />
           <div className="shell pointer-events-none relative flex min-h-[36rem] flex-col items-start pt-12 pb-44 sm:min-h-[40rem] md:justify-center md:py-24 [&>*]:pointer-events-auto lg:min-h-[clamp(38rem,74svh,54rem)]">
             <p className="meta mb-7 flex flex-wrap items-center gap-3 text-mint">
               <span>
