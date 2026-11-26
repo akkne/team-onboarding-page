@@ -56,72 +56,33 @@ export const team = {
   ] as Project[],
   skills: [
     {
-      category: { ru: "Языки", en: "Languages" },
-      items: ["C#", "SQL", "JavaScript", "TypeScript"],
-    },
-    {
-      category: { ru: "Фронтенд", en: "Frontend" },
-      items: ["HTML", "CSS", "React", "Next.js", "Tailwind CSS", "PostCSS"],
-    },
-    {
-      category: { ru: "Бэкенд", en: "Backend" },
-      items: [".NET", "ASP.NET Core", "Entity Framework", "LINQ"],
-    },
-    {
-      category: { ru: "Данные и поиск", en: "Data and search" },
-      items: ["PostgreSQL", "MongoDB", "Redis", "Elasticsearch", "S3", "ACID"],
-    },
-    {
-      category: { ru: "API и интеграции", en: "APIs and integrations" },
+      category: "Frontend",
       items: [
-        "REST API", "gRPC", "YARP", "JWT", "Telegram API", "Telegram Bot API", "Web Push",
-        { ru: "Мобильные push-уведомления", en: "Mobile push notifications" },
-        { ru: "Электронная почта", en: "Email" },
+        "HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js",
+        "Tailwind CSS", "PostCSS", "Node.js", "ESLint",
       ],
     },
     {
-      category: { ru: "События и очереди", en: "Events and queues" },
+      category: "Backend",
       items: [
-        "Apache Kafka", "RabbitMQ", "Transactional Outbox",
-        { ru: "Идемпотентные консьюмеры", en: "Idempotent consumers" },
-        { ru: "Дедупликация", en: "Deduplication" },
-        { ru: "Очереди недоставленных сообщений (DLQ)", en: "Dead-letter queues (DLQ)" },
-        { ru: "Доставка хотя бы один раз", en: "At-least-once delivery" },
+        "C#", ".NET", "ASP.NET Core", "Entity Framework", "LINQ", "SQL",
+        "PostgreSQL", "MongoDB", "Redis", "Elasticsearch",
+        "REST API", "gRPC", "YARP", "JWT", "Telegram API", "Telegram Bot API",
+        "Web Push", "Mobile Push", "SMTP mailing", "Unit tests",
       ],
     },
     {
-      category: { ru: "Архитектура", en: "Architecture" },
+      category: "Architecture",
       items: [
-        { ru: "Микросервисы", en: "Microservices" },
-        { ru: "Событийная архитектура", en: "Event-driven architecture" },
-        { ru: "База данных на сервис", en: "Database per service" },
-        { ru: "Согласованность в конечном счёте", en: "Eventual consistency" },
-        { ru: "Шлюз API", en: "API gateway" },
-        { ru: "Эшелонированная защита", en: "Defense in depth" },
+        "Microservices", "Event-driven architecture", "Transactional Outbox",
+        "Idempotent consumers", "Deduplication", "Dead-letter queues (DLQ)", "ACID",
       ],
     },
     {
-      category: { ru: "Инфраструктура", en: "Infrastructure" },
-      items: ["Docker", "Docker Compose", "Nginx", "CI/CD", "GitHub Actions"],
-    },
-    {
-      category: { ru: "Наблюдаемость", en: "Observability" },
-      items: ["Prometheus", "Grafana", "Loki"],
-    },
-    {
-      category: { ru: "Разработка и тесты", en: "Development and testing" },
+      category: "Infrastructure",
       items: [
-        "Git", "Node.js", "npm", "ESLint",
-        { ru: "Модульные тесты", en: "Unit tests" },
-        { ru: "Контрактные тесты схем событий", en: "Event schema contract tests" },
-      ],
-    },
-    {
-      category: { ru: "ИИ и речь", en: "AI and speech" },
-      items: [
-        { ru: "ИИ-агенты", en: "AI agents" },
-        { ru: "Распознавание речи", en: "Speech recognition" },
-        { ru: "Синтез речи", en: "Speech synthesis" },
+        "Docker", "Docker Compose", "Nginx", "S3", "Apache Kafka", "RabbitMQ",
+        "Git", "CI/CD", "GitHub Actions", "Prometheus", "Grafana", "Loki",
       ],
     },
   ],
