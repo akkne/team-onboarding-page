@@ -51,7 +51,7 @@
   .intro {
     @apply text-xl leading-[1.4] md:text-[2rem] md:leading-[1.25];
   }
-  .meta {
+  .section-label {
     @apply text-base leading-[1.375] font-medium tracking-[-0.01em] md:text-lg md:leading-[1.33] xl:text-xl xl:leading-[1.5];
   }
   .body-copy, .pill {

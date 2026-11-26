@@ -109,7 +109,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         >
           <ParticleSphere labels={getSphereLabels()} />
           <div className="shell pointer-events-none relative flex min-h-[36rem] flex-col items-start pt-12 pb-44 sm:min-h-[40rem] md:justify-center md:py-24 [&>*]:pointer-events-auto lg:min-h-[clamp(38rem,74svh,54rem)]">
-            <p className="meta mb-7 text-mint">
+            <p className="section-label mb-7 text-mint">
               {team.event[lang]} {team.year}
             </p>
             <h1 id="hero-title" lang="en" className="hero-title">
@@ -129,7 +129,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           className="border-b border-line"
         >
           <div className="shell section-space grid items-baseline gap-6 md:grid-cols-[1fr_2fr]">
-            <h2 id="about-title" className="meta text-mint">
+            <h2 id="about-title" className="section-label text-mint">
               {t.about}
             </h2>
             <div className="intro max-w-[38ch] space-y-6">
@@ -155,7 +155,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                   className="overflow-hidden rounded-2xl border border-line bg-panel"
                 >
                   <div className="flex flex-col items-start justify-center p-6 md:p-10">
-                    <span className="meta text-lilac">{t[project.kind]}</span>
+                    <span className="section-label text-lilac">{t[project.kind]}</span>
                     <h3 className="card-title mt-3">
                       {project.title[lang]}
                     </h3>
@@ -203,7 +203,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                   key={category}
                   className="grid gap-3 py-6 sm:grid-cols-[9rem_1fr]"
                 >
-                  <dt className="meta text-mint">{category}</dt>
+                  <dt className="section-label text-mint">{category}</dt>
                   <dd>
                     <ul className="body-copy flex flex-wrap gap-x-6 gap-y-1">
                       {items.map((item) => (
