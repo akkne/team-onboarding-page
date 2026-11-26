@@ -23,8 +23,14 @@ const repository = "https://github.com/akkne/team-onboarding-page";
 
 export const team = {
   about: {
-    ru: "Мы учимся в группах ИУ5-12/4 и ИУ5-13/4. На «Волга.ТОП» мы хотим проверить, как наши решения в дизайне, аналитике и разработке работают вместе. Первым делом мы собрали эту визитку.",
-    en: "We are students from groups ИУ5-12/4 and ИУ5-13/4. We joined Volga.TOP to see how our design, analysis and engineering decisions work together. This site is our first result.",
+    ru: [
+      "Мы строим распределённые веб-системы с нуля и доводим их до продакшена. Начинаем с анализа задачи и дизайна интерфейсов, затем разрабатываем фронтенд и бэкенд. Развёртывание тоже берём на себя. Среди наших задач — отказоустойчивые сервисы с атомарными транзакциями, разработка алгоритмов и внедрение ИИ в приложения.",
+      "Мы познакомились в университете и быстро нашли общий язык. Нас объединили схожие взгляды на то, каким должен быть хороший продукт. У каждого из нас свои сильные стороны в аналитике, дизайне и разработке. Они дополняют друг друга, и вместе мы можем разработать программное решение для любой задачи. Мы учимся на факультете «Информатика и системы управления» (ИУ) МГТУ им. Н. Э. Баумана.",
+    ],
+    en: [
+      "We build distributed web systems from scratch and take them all the way to production. We work out what the product needs to do, design its interfaces, build the frontend and backend, and deploy it ourselves. We design fault-tolerant services with atomic transactions, develop algorithms, and integrate AI into applications.",
+      "We met at university and soon realized we shared a sense of what makes a good product. Each of us brings different strengths in analysis, design, and engineering. Those strengths complement each other, so together we can build software for any challenge. We study at the Faculty of Informatics and Control Systems at Bauman Moscow State Technical University.",
+    ],
   },
   event: { ru: "Волга.ТОП", en: "Volga.TOP" },
   year: 2026,
