@@ -132,9 +132,11 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <h2 id="about-title" className="meta text-mint">
               {t.about}
             </h2>
-            <p className="intro max-w-[38ch]">
-              {team.about[lang]}
-            </p>
+            <div className="intro max-w-[38ch] space-y-6">
+              {team.about[lang].map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
           </div>
         </section>
         {team.projects.length > 0 && (
