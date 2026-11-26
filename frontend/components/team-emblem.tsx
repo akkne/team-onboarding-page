@@ -1,14 +1,20 @@
-// Folded facets form the M in the team's wordmark.
-export function TeamEmblem() {
+import Image from "next/image";
+import logo from "../assets/logo.png";
+
+export function TeamEmblem({ placement }: { placement: "header" | "cover" }) {
+  const inHeader = placement === "header";
+
   return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 48 36"
-      fill="currentColor"
-      className="h-7 w-9"
-    >
-      <path d="M0 31 12 5h8L8 31zm14 0L26 5h8L22 31zm14 0L40 5h8L36 31z" />
-      <path d="m12 5 7 15 4-9-3-6zm14 0 7 15 4-9-3-6z" />
-    </svg>
+    <Image
+      src={logo}
+      alt=""
+      sizes={inHeader ? "64px" : "(min-width: 640px) 192px, 144px"}
+      loading={inHeader ? "eager" : "lazy"}
+      className={
+        inHeader
+          ? "h-auto w-16 rounded-md bg-white p-1"
+          : "h-auto w-36 max-w-full mix-blend-multiply sm:w-48"
+      }
+    />
   );
 }

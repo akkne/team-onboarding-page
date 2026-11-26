@@ -72,15 +72,6 @@
   .hero-title {
     @apply max-w-[6em] text-[clamp(3.5rem,8.6vw,8.5rem)] leading-[0.89] font-medium tracking-[-0.062em];
   }
-  .project-emblem {
-    background:
-      repeating-linear-gradient(
-        120deg,
-        transparent 0 13px,
-        #20142b12 13px 14px
-      ),
-      var(--color-lilac);
-  }
   @media (max-width: 47.99rem) {
     .hero {
       background-size: 100% 100%, auto 64%;

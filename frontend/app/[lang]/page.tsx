@@ -65,7 +65,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             aria-label={teamName}
             className="flex items-center gap-2 text-[1.5rem] font-semibold tracking-[-0.065em]"
           >
-            <TeamEmblem />
+            <TeamEmblem placement="header" />
             <span lang="en">rm.team</span>
           </a>
           <nav
@@ -203,9 +203,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                 >
                   <div
                     aria-hidden="true"
-                    className="project-emblem grid min-h-32 place-items-center text-ink sm:min-h-64 [&_svg]:h-16 [&_svg]:w-24"
+                    className="grid min-h-32 place-items-center bg-paper p-5 sm:min-h-64"
                   >
-                    <TeamEmblem />
+                    <TeamEmblem placement="cover" />
                   </div>
                   <div className="flex flex-col items-start justify-center p-6 md:p-10">
                     <span className="meta text-lilac">{t[project.kind]}</span>
