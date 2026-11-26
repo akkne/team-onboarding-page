@@ -5,9 +5,9 @@ export type Translation = Record<Locale, string>;
 
 export interface Member {
   name: Translation;
-  role: Translation;
+  role: string;
   group: string;
-  contribution: Translation;
+  achievements: Translation[];
   photo?: string;
   skills: Translation[];
 }
@@ -92,57 +92,79 @@ export const team = {
 export const members: Member[] = [
   {
     name: { ru: "Стукалов Артём Андреевич", en: "Artyom Andreyevich Stukalov" },
-    role: {
-      ru: "Дизайнер и координатор проекта",
-      en: "Designer and project coordinator",
-    },
+    role: "Designer, Technical Writer",
     group: "ИУ5-12/4",
     skills: [
       { ru: "Дизайн", en: "Design" },
       { ru: "Документация", en: "Documentation" },
     ],
-    contribution: {
-      ru: "Фронтенд, документация и подготовка архива ИИ-сессий.",
-      en: "Frontend development, documentation and preparation of the AI session archive.",
-    },
+    achievements: [
+      {
+        ru: "Входит в команду дизайнеров МГТУ им. Н. Э. Баумана.",
+        en: "Member of the design team at Bauman Moscow State Technical University.",
+      },
+      {
+        ru: "Диплом I степени на конференции «Эксперимент в космосе. Космос для всех» (2026) за систему компьютерного зрения для мониторинга усталости космонавта.",
+        en: "First-degree diploma at “Experiment in Space. Space for All” (2026) for a computer vision system that monitors cosmonaut fatigue.",
+      },
+    ],
   },
   {
     name: { ru: "Стёпкин Артемий Юрьевич", en: "Artemiy Yuryevich Styopkin" },
-    role: {
-      ru: "Руководитель команды и технический руководитель",
-      en: "Team Lead, Tech Lead",
-    },
+    role: "Team Lead, Tech Lead, Backend Developer",
     group: "ИУ5-12/4",
     skills: [
       { ru: "Координация", en: "Coordination" },
       { ru: "Техлидство", en: "Technical leadership" },
     ],
-    contribution: {
-      ru: "Координация команды и руководство техническим направлением.",
-      en: "Team coordination and technical leadership.",
-    },
+    achievements: [
+      {
+        ru: "1,5 года в продуктовой бэкенд-разработке.",
+        en: "1.5 years building product backends.",
+      },
+      {
+        ru: "Победитель Московской предпрофессиональной олимпиады школьников 2026 года по информатике.",
+        en: "Winner, Moscow Pre-Professional Olympiad for Schoolchildren 2026 (CS Track).",
+      },
+      {
+        ru: "Сооснователь Sellevate.",
+        en: "Co-founder of Sellevate.",
+      },
+    ],
   },
   {
     name: { ru: "Зеленко Артур Олегович", en: "Artur Olegovich Zelenko" },
-    role: { ru: "Frontend-разработчик", en: "Frontend developer" },
+    role: "Frontend Developer",
     group: "ИУ5-12/4",
     skills: [{ ru: "Фронтенд", en: "Frontend development" }],
-    contribution: { ru: "Разработка фронтенда.", en: "Frontend development." },
+    achievements: [
+      {
+        ru: "Входит в команду разработчиков МГТУ им. Н. Э. Баумана.",
+        en: "Member of the development team at Bauman Moscow State Technical University.",
+      },
+      {
+        ru: "Призёр финального этапа научной конференции «Инженеры будущего».",
+        en: "Prize winner in the final round of the “Engineers of the Future” science conference.",
+      },
+    ],
   },
   {
     name: { ru: "Верховых Егор Дмитриевич", en: "Egor Dmitrievich Verkhovykh" },
-    role: {
-      ru: "Аналитик, креативный директор",
-      en: "Analyst, Creative Director",
-    },
+    role: "CEO, Analyst",
     group: "ИУ5-13/4",
     skills: [
       { ru: "Аналитика", en: "Analysis" },
       { ru: "Редактура", en: "Editing" },
     ],
-    contribution: {
-      ru: "Аналитика, креативное направление и проверка README.",
-      en: "Analysis, creative direction and README review.",
-    },
+    achievements: [
+      {
+        ru: "Победитель хакатона «Энергия города — в дело».",
+        en: "Winner of the “City Energy — Into Action” hackathon.",
+      },
+      {
+        ru: "Призёр исследовательского трека Московской предпрофессиональной олимпиады школьников 2026 года.",
+        en: "Prize winner, Moscow Pre-Professional Olympiad for Schoolchildren 2026 (Research Track).",
+      },
+    ],
   },
 ];
