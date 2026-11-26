@@ -1,3 +1,4 @@
+import { ProjectCard } from "../../components/project-card";
 import { getSphereLabels } from "../../data/sphere-labels";
 import { ParticleSphere } from "../../components/particle-sphere";
 import { MemberCard } from "../../components/member-card";
@@ -15,9 +16,6 @@ const copy = {
     menu: "Разделы страницы",
     skip: "Перейти к содержимому",
     meet: "Познакомиться с командой",
-    project: "Проект",
-    idea: "Идея",
-    view: "Открыть проект",
     repository: "Репозиторий на GitHub",
     message: "Написать в GitHub Issues",
   },
@@ -31,9 +29,6 @@ const copy = {
     menu: "Page sections",
     skip: "Skip to content",
     meet: "Meet the team",
-    project: "Project",
-    idea: "Idea",
-    view: "View project",
     repository: "GitHub repository",
     message: "Contact us on GitHub Issues",
   },
@@ -150,26 +145,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             </h2>
             <div className="grid gap-4">
               {team.projects.map((project) => (
-                <article
-                  key={project.title.ru}
-                  className="overflow-hidden rounded-2xl border border-line bg-panel"
-                >
-                  <div className="flex flex-col items-start justify-center p-6 md:p-10">
-                    <span className="section-label text-lilac">{t[project.kind]}</span>
-                    <h3 className="card-title mt-3">
-                      {project.title[lang]}
-                    </h3>
-                    <p className="body-copy mt-3 max-w-prose text-muted">
-                      {project.description[lang]}
-                    </p>
-                    {project.href && (
-                      <a href={project.href} className="pill mt-5">
-                        {t.view}
-                        <span className="sr-only"> {project.title[lang]}</span>
-                      </a>
-                    )}
-                  </div>
-                </article>
+                <ProjectCard key={project.title.ru} project={project} lang={lang} />
               ))}
             </div>
           </section>
