@@ -67,8 +67,9 @@ export const team = {
       items: [
         "C#", ".NET", "ASP.NET Core", "Entity Framework", "LINQ", "SQL",
         "PostgreSQL", "MongoDB", "Redis", "Elasticsearch",
-        "REST API", "gRPC", "YARP", "JWT", "Telegram API", "Telegram Bot API",
-        "Web Push", "Mobile Push", "SMTP mailing", "Unit tests",
+        "REST API", "gRPC", "YARP", "JWT", "Telegram API",
+        "Web Push", "Mobile Push", "SMTP mailing",
+        "Unit tests", "Integrational tests", "Module tests",
       ],
     },
     {
