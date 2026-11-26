@@ -28,10 +28,15 @@ export function MemberCard({ member, lang }: { member: Member; lang: Locale }) {
       <h3 className="card-title max-w-[23ch]">
         {name}
       </h3>
-      <p className="body-copy mt-2 text-lilac">{member.role[lang]}</p>
-      <p className="body-copy mt-4 text-muted">
-        {member.contribution[lang]}
-      </p>
+      <p lang="en" className="body-copy mt-2 text-lilac">{member.role}</p>
+      <ul
+        aria-label={lang === "ru" ? "Достижения" : "Achievements"}
+        className="body-copy mt-4 list-disc space-y-2 pl-5 text-muted"
+      >
+        {member.achievements.map((achievement) => (
+          <li key={achievement.en}>{achievement[lang]}</li>
+        ))}
+      </ul>
       <ul className="mt-5 flex flex-wrap gap-2">
         {member.skills.map((skill) => (
           <li key={skill.ru} className="tag">
