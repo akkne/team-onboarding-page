@@ -10,7 +10,6 @@ export interface Member {
   contribution: Translation;
   photo?: string;
   skills: Translation[];
-  contact?: string;
 }
 
 interface Project {
