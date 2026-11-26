@@ -148,8 +148,8 @@ export const team = {
     {
       title: { ru: "Sellevate", en: "Sellevate" },
       description: {
-        ru: "Артемий Стёпкин развивает Sellevate как сооснователь и технический руководитель. Платформа помогает компаниям обучать отделы продаж с помощью ИИ-агентов. Менеджеры тренируются отвечать на возражения покупателя до звонка реальному клиенту.",
-        en: "Artemiy Styopkin is the co-founder and tech lead of Sellevate, a B2B platform that uses AI agents to train sales teams. Sales reps practice responding to buyer objections before they speak to a customer.",
+        ru: "Артемий развивает Sellevate как сооснователь и технический руководитель. Платформа помогает компаниям обучать отделы продаж с помощью ИИ-агентов. Менеджеры тренируются отвечать на возражения покупателя до звонка реальному клиенту.",
+        en: "Artemiy is the co-founder and tech lead of Sellevate, a B2B platform that uses AI agents to train sales teams. Sales reps practice responding to buyer objections before they speak to a customer.",
       },
       story: [
         {
