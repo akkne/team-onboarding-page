@@ -69,7 +69,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             className="flex items-center gap-2 text-[1.5rem] font-semibold tracking-[-0.065em]"
           >
             <TeamEmblem placement="header" />
-            <span lang="en">rm.team</span>
+            <span lang="en" className="tracking-[-0.02em]">
+              rm.team
+            </span>
           </a>
           <nav
             aria-label={t.menu}
