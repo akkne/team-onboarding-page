@@ -3,7 +3,7 @@
 | Часть | Выбор |
 | --- | --- |
 | Интерфейс | Next.js 16, App Router, React 19, TypeScript 5 |
-| Оформление | Tailwind CSS 4 через PostCSS, локальные токены и компоненты, шрифт Inter |
+| Оформление | Tailwind CSS 4 через PostCSS, локальные токены и компоненты, стек ABC Diatype, Helvetica, Arial и системный sans-serif |
 | Разработка | Node.js 22, npm, версии зависимостей в `frontend/package-lock.json` |
 | Проверки | ESLint, генерация типов маршрутов, TypeScript, сборка Next.js |
 | Запуск | Next.js локально или в Docker Compose |

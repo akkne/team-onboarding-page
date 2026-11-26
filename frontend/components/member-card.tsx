@@ -23,13 +23,13 @@ export function MemberCard({ member, lang }: { member: Member; lang: Locale }) {
             {initials}
           </span>
         )}
-        <span className="meta text-muted">{member.group}</span>
+        <span className="caption text-muted">{member.group}</span>
       </div>
-      <h3 className="max-w-[23ch] text-2xl leading-tight font-medium tracking-tight">
+      <h3 className="card-title max-w-[23ch]">
         {name}
       </h3>
-      <p className="mt-2 text-lilac">{member.role[lang]}</p>
-      <p className="mt-4 leading-relaxed text-muted">
+      <p className="body-copy mt-2 text-lilac">{member.role[lang]}</p>
+      <p className="body-copy mt-4 text-muted">
         {member.contribution[lang]}
       </p>
       <ul className="mt-5 flex flex-wrap gap-2">

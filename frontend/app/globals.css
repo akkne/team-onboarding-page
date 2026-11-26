@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: "ABC Diatype", Diatype, Helvetica, Arial, system-ui, sans-serif;
   --color-ink: #08090b;
   --color-panel: #131417;
   --color-line: #343439;
@@ -8,9 +9,6 @@
   --color-muted: #b7b6bf;
   --color-lilac: #dfcdf5;
   --color-mint: #a4f1cf;
-}
-@theme inline {
-  --font-sans: var(--font-inter), Arial, sans-serif;
 }
 
 @layer base {
@@ -38,26 +36,47 @@
   .section-space {
     @apply py-14 md:py-20 lg:py-24;
   }
+  .hero-title {
+    @apply max-w-[6em] text-[2.5rem] leading-[1.1] font-medium tracking-[-0.03em] md:text-[3.5rem] md:leading-none xl:text-[5.5rem];
+  }
   .section-title {
-    @apply text-[clamp(2.35rem,5vw,4.5rem)] leading-none font-medium tracking-[-0.06em];
+    @apply text-[2rem] leading-[1.25] font-medium tracking-[-0.04em] md:text-[2.5rem] md:leading-[1.1] xl:text-[4rem] xl:leading-[1.125];
+  }
+  .card-title {
+    @apply text-base leading-[1.5] font-medium tracking-[-0.02em] md:text-2xl md:leading-[1.333];
+  }
+  .lead {
+    @apply text-lg leading-[1.33] tracking-[-0.02em] md:text-2xl;
+  }
+  .intro {
+    @apply text-xl leading-[1.4] md:text-[2rem] md:leading-[1.25];
   }
   .meta {
-    @apply font-mono text-xs leading-5 font-medium tracking-[0.075em] uppercase;
+    @apply text-base leading-[1.375] font-medium tracking-[-0.01em] md:text-lg md:leading-[1.33] xl:text-xl xl:leading-[1.5];
+  }
+  .body-copy, .pill {
+    @apply text-base leading-[1.25] tracking-[-0.01em] md:text-lg md:leading-[1.44] xl:leading-[1.33];
+  }
+  .caption, .tag, .text-link {
+    @apply text-sm leading-[1.42] tracking-[-0.01em] md:text-base md:leading-[1.5];
+  }
+  .fine-print {
+    @apply text-xs leading-[1.33] md:text-sm md:leading-[1.43];
   }
   .pill {
-    @apply inline-flex min-h-12 items-center justify-center rounded-full bg-paper px-6 text-base font-medium tracking-tight text-ink transition-colors hover:bg-mint motion-reduce:transition-none;
+    @apply inline-flex min-h-12 items-center justify-center rounded-full bg-paper px-6 font-normal text-ink transition-colors hover:bg-mint motion-reduce:transition-none;
   }
   .pill:focus-visible {
     outline-color: var(--color-mint);
   }
   .text-link {
-    @apply inline-block py-1 text-sm font-medium underline decoration-current/50 underline-offset-4 hover:decoration-current;
+    @apply inline-block py-1 underline decoration-current/50 underline-offset-4 hover:decoration-current;
   }
   .tag {
-    @apply rounded-full border border-line px-3 py-1 text-sm text-muted;
+    @apply rounded-full border border-line px-3 py-1 text-muted;
   }
   .avatar {
-    @apply grid size-13 shrink-0 place-items-center rounded-full bg-lilac font-mono text-base font-medium text-ink;
+    @apply grid size-13 shrink-0 place-items-center rounded-full bg-lilac text-base font-medium text-ink;
   }
   .member-card:nth-child(2n) .avatar {
     @apply bg-mint;
@@ -95,8 +114,5 @@
   }
   .particle-sphere[data-ready] .sphere-labels li {
     @apply top-1/2 left-1/2;
-  }
-  .hero-title {
-    @apply max-w-[6em] text-[clamp(3.5rem,8.6vw,8.5rem)] leading-[0.89] font-medium tracking-[-0.062em];
   }
 }
