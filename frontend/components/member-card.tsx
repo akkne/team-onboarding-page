@@ -51,7 +51,7 @@ export function MemberCard({ member, lang }: { member: Member; lang: Locale }) {
         className="text-link mt-auto self-start"
       >
         {contactLabel}
-        <span className="sr-only"> — {name}</span>
+        <span className="sr-only"> - {name}</span>
       </a>
     </article>
   );

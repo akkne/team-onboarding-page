@@ -24,7 +24,7 @@ const repository = "https://github.com/akkne/team-onboarding-page";
 
 export const team = {
   about: {
-    ru: "Мы — студенты групп ИУ5-12/4 и ИУ5-13/4. На «Волга.ТОП» мы хотим проверить, как наши решения в дизайне, аналитике и разработке работают вместе. Первый результат — эта визитка.",
+    ru: "Мы - студенты групп ИУ5-12/4 и ИУ5-13/4. На «Волга.ТОП» мы хотим проверить, как наши решения в дизайне, аналитике и разработке работают вместе. Первый результат - эта визитка.",
     en: "We are students from groups ИУ5-12/4 and ИУ5-13/4. We joined Volga.TOP to see how our design, analysis and engineering decisions work together. This site is our first result.",
   },
   event: { ru: "Волга.ТОП", en: "Volga.TOP" },

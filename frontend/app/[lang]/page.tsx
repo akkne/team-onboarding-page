@@ -220,7 +220,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                         {t.view}
                         <span className="sr-only">
                           {" "}
-                          — {project.title[lang]}
+                          - {project.title[lang]}
                         </span>
                       </a>
                     )}
