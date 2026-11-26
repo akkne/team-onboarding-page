@@ -7,4 +7,5 @@
 | Разработка | Node.js 22, npm, версии зависимостей в `frontend/package-lock.json` |
 | Проверки | ESLint, генерация типов маршрутов, TypeScript, сборка Next.js |
 | Запуск | Next.js локально или в Docker Compose |
+| Публикация | Ubuntu, Docker Compose и Caddy с автоматическим HTTPS |
 | CI | GitHub Actions |
