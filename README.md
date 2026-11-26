@@ -122,7 +122,7 @@ docker compose down
 | ![Визитка команды на русском языке](docs/screenshots/home-ru.webp) | ![Визитка команды на английском языке](docs/screenshots/home-en-mobile.webp) |
 
 - Домен визитки — [recessed-maxilla.space](https://recessed-maxilla.space).
-- Исходный код и история разработки доступны в [репозитории GitHub](https://github.com/akkne/team-onboarding-page).
+- Репозитории проекта — [GitVerse](https://gitverse.ru/akkne/team-onboarding-page) и [GitHub](https://github.com/akkne/team-onboarding-page).
 
 ## 9. Дополнительные задания
 
