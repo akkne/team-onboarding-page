@@ -70,17 +70,17 @@
       #0d0e10;
   }
   .particle-sphere {
-    @apply relative order-1 mx-auto my-3 aspect-square w-full max-w-[27rem];
+    @apply absolute right-0 bottom-0 aspect-square w-[min(78vw,19rem)] touch-pan-y select-none motion-reduce:pointer-events-none md:top-1/2 md:right-[2%] md:bottom-auto md:w-[min(57%,85svh,54rem)] md:-translate-y-1/2;
     background: radial-gradient(closest-side, #7176cf24, #7566b00d 85%, transparent);
+  }
+  .particle-sphere[data-ready] {
+    @apply motion-safe:cursor-grab motion-safe:active:cursor-grabbing;
   }
   .particle-sphere:not([data-ready]) canvas {
     background: url("./assets/particle-sphere.webp") center / contain no-repeat;
   }
   .hero-title {
-    @apply relative mt-6 text-[clamp(3.65rem,10vw,9rem)] leading-[0.94] font-normal tracking-[-0.075em];
-  }
-  .hero-action {
-    @apply relative order-2;
+    @apply max-w-[6em] text-[clamp(3.5rem,8.6vw,8.5rem)] leading-[0.89] font-medium tracking-[-0.062em];
   }
   .project-brand {
     @apply absolute right-4 bottom-4 inline-flex items-center gap-[0.34em] rounded-full border border-[#09318d]/15 bg-white/95 px-4 py-3 text-[#09318d] shadow-lg;
@@ -94,35 +94,5 @@
     @apply block size-[0.68em] shrink-0 bg-[#f59acc];
     border-radius: 55% 55% 55% 12%;
     transform: rotate(-12deg);
-  }
-  @media (min-width: 48rem) {
-    .hero-layout {
-      min-height: max(39rem, calc(100svh - 4.6rem));
-    }
-    .particle-sphere {
-      @apply absolute top-1/2 left-1/2 my-0 max-w-none -translate-1/2;
-      width: min(63%, 86svh, 62rem);
-    }
-    .hero-event {
-      @apply absolute top-[8%] left-[6%];
-    }
-    .hero-title {
-      @apply pointer-events-none absolute inset-0 m-0 text-[clamp(4.4rem,7.6vw,9rem)];
-    }
-    .hero-title span {
-      @apply pointer-events-auto absolute;
-    }
-    .hero-title span:nth-child(1) {
-      @apply top-[17%] left-[9%];
-    }
-    .hero-title span:nth-child(2) {
-      @apply top-[34%] left-[64%];
-    }
-    .hero-title span:nth-child(3) {
-      @apply bottom-[20%] left-[17%];
-    }
-    .hero-action {
-      @apply absolute right-[3%] bottom-[16%] left-[60%] lg:left-[69%];
-    }
   }
 }

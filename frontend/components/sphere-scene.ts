@@ -1,3 +1,5 @@
+import type { SpherePose } from "./sphere-motion";
+
 const tau = 2 * Math.PI;
 const starColors = ["#8daeff", "#9cffe6", "#ff966e", "#c1a2ff"];
 
@@ -49,13 +51,17 @@ export function createSphereScene(context: CanvasRenderingContext2D, labels: HTM
     return { element, x: ring * Math.sin(angle), y, z: ring * Math.cos(angle) };
   });
 
-  return function draw(size: number, time: number) {
-    const radius = size * 0.465;
+  return function draw(size: number, time: number, pose: SpherePose) {
+    const radius = size * 0.40;
     const center = size / 2;
-    const angle = time * 0.095;
+    const angle = pose.yaw + (pose.pointerX - 0.5) * pose.influence * 0.22;
     const cos = Math.cos(angle);
     const sin = Math.sin(angle);
-    const tilt = 0.12 * Math.sin(time * 0.13) - 0.08;
+    const tilt = pose.pitch + 0.12 * Math.sin(time * 0.23) - (pose.pointerY - 0.5) * pose.influence * 0.16;
+    const breathing = 0.045 * Math.sin(time * 1.1);
+    const width = 1 + pose.stretchX - pose.stretchY * 0.4 + breathing;
+    const height = 1 + pose.stretchY - pose.stretchX * 0.4 - breathing;
+    const reach = size * 0.23;
     const ct = Math.cos(tilt);
     const st = Math.sin(tilt);
     context.clearRect(0, 0, size, size);
@@ -63,10 +69,21 @@ export function createSphereScene(context: CanvasRenderingContext2D, labels: HTM
     for (const p of particles) {
       const z = p.z * cos - p.x * sin;
       const depth = z * ct + p.y * st;
-      const wave = 1 + 0.013 * Math.sin(time * 0.68 + p.phase);
+      const wave = 1 + 0.034 * Math.sin(time * 0.95 + p.phase)
+        + pose.expansion * (0.2 + p.size * 170);
       const scale = radius * wave / (1 - depth * 0.095);
-      const x = center + (p.x * cos + p.z * sin) * scale;
-      const y = center + (p.y * ct - z * st) * scale;
+      let x = center + (p.x * cos + p.z * sin) * scale * width;
+      let y = center + (p.y * ct - z * st) * scale * height;
+      if (pose.influence > 0.01) {
+        const dx = x - pose.pointerX * size;
+        const dy = y - pose.pointerY * size;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < reach) {
+          const push = (1 - distance / reach) ** 2 * reach * pose.influence / Math.max(1, distance);
+          x += dx * push;
+          y += dy * push;
+        }
+      }
       const light = (depth + 1) / 2;
       const dot = Math.max(0.55, radius * p.size * (0.68 + light));
       context.globalAlpha = 0.29 + light * (0.58 + 0.12 * Math.sin(p.phase + time));
@@ -84,9 +101,9 @@ export function createSphereScene(context: CanvasRenderingContext2D, labels: HTM
       const z = anchor.z * cos - anchor.x * sin;
       const depth = z * ct + anchor.y * st;
       const scale = radius * 0.78 / (1 - depth * 0.095);
-      anchor.element.style.left = `${center + (anchor.x * cos + anchor.z * sin) * scale}px`;
-      anchor.element.style.top = `${center + (anchor.y * ct - z * st) * scale}px`;
-      anchor.element.style.opacity = String(Math.min(1, Math.max(0, depth * 5)));
+      anchor.element.style.left = `${center + (anchor.x * cos + anchor.z * sin) * scale * width}px`;
+      anchor.element.style.top = `${center + (anchor.y * ct - z * st) * scale * height}px`;
+      anchor.element.style.opacity = String(Math.min(1, Math.max(0, depth * 5)) * (1 - pose.expansion));
     }
   };
 }

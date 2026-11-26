@@ -109,9 +109,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           aria-labelledby="hero-title"
           className="hero relative isolate overflow-hidden border-b border-line"
         >
-          <div className="hero-layout relative mx-auto flex max-w-[112rem] flex-col px-5 py-8 sm:px-9 md:block md:px-0 md:py-0">
-            <ParticleSphere lang={lang} />
-            <p className="hero-event meta flex flex-wrap items-center gap-3 text-mint">
+          <ParticleSphere lang={lang} />
+          <div className="shell pointer-events-none relative flex min-h-[36rem] flex-col items-start pt-12 pb-44 sm:min-h-[40rem] md:justify-center md:py-24 [&>*]:pointer-events-auto lg:min-h-[clamp(38rem,74svh,54rem)]">
+            <p className="meta mb-7 flex flex-wrap items-center gap-3 text-mint">
               <span>
                 {team.event[lang]} {team.year}
               </span>
@@ -119,18 +119,14 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               {t.round}
             </p>
             <h1 id="hero-title" lang="en" className="hero-title">
-              {teamName.split(" ").map((word, index) => (
-                <span key={index}>{index > 0 && " "}{word}</span>
-              ))}
+              {teamName}
             </h1>
-            <div className="hero-action flex flex-col items-start gap-5">
-              <p className="max-w-[23ch] text-lg leading-snug tracking-tight text-paper md:text-xl">
-                {team.motto[lang]}
-              </p>
-              <a href="#members" className="pill">
-                {t.meet}
-              </a>
-            </div>
+            <p className="mt-6 max-w-[30ch] text-xl leading-snug tracking-tight text-paper md:text-2xl">
+              {team.motto[lang]}
+            </p>
+            <a href="#members" className="pill mt-8">
+              {t.meet}
+            </a>
           </div>
         </section>
         <section
