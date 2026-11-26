@@ -32,8 +32,8 @@ export const team = {
   event: { ru: "Волга.ТОП", en: "Volga.TOP" },
   year: 2026,
   motto: {
-    ru: "У каждого своя роль. Собираем вместе.",
-    en: "Different roles. One shared build.",
+    ru: "Дизайн, аналитика и разработка - в одной команде.",
+    en: "Design, analysis and development in one team.",
   },
   contact: repository + "/issues",
   repository,
@@ -144,7 +144,10 @@ export const team = {
 export const members: Member[] = [
   {
     name: { ru: "Стукалов Артём Андреевич", en: "Artyom Andreyevich Stukalov" },
-    role: { ru: "Дизайнер", en: "Designer" },
+    role: {
+      ru: "Дизайнер и координатор проекта",
+      en: "Designer and project coordinator",
+    },
     group: "ИУ5-12/4",
     skills: [
       { ru: "Дизайн", en: "Design" },
