@@ -103,17 +103,17 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           className="hero relative isolate overflow-hidden border-b border-line"
         >
           <ParticleSphere labels={getSphereLabels()} />
-          <div className="shell pointer-events-none relative flex min-h-[36rem] flex-col items-start pt-12 pb-44 sm:min-h-[40rem] md:justify-center md:py-24 [&>*]:pointer-events-auto lg:min-h-[clamp(38rem,74svh,54rem)]">
-            <p className="section-label mb-7 text-mint">
+          <div className="shell pointer-events-none relative flex min-h-[36rem] flex-col items-start py-6 sm:min-h-[40rem] lg:justify-center lg:py-24 [&>*]:pointer-events-auto lg:min-h-[clamp(38rem,74svh,54rem)]">
+            <p className="section-label mb-3 text-mint lg:mb-7">
               {team.event[lang]} {team.year}
             </p>
-            <h1 id="hero-title" lang="en" className="hero-title">
+            <h1 id="hero-title" lang="en" className="hero-title md:max-lg:max-w-none">
               {teamName}
             </h1>
-            <p className="lead mt-6 max-w-[30ch] font-medium text-paper">
+            <p className="lead mt-auto max-w-[30ch] font-medium text-paper lg:mt-6">
               {team.motto[lang]}
             </p>
-            <a href="#members" className="pill mt-8">
+            <a href="#members" className="pill mt-4 lg:mt-8">
               {t.meet}
             </a>
           </div>
