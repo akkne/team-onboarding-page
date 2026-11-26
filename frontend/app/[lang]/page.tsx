@@ -179,9 +179,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                   <dt className="meta text-mint">{category[lang]}</dt>
                   <dd>
                     <ul className="flex flex-wrap gap-x-6 gap-y-1 text-lg tracking-tight md:text-xl">
-                      {items.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
+                      {items.map((item) => {
+                        const label = typeof item === "string" ? item : item[lang];
+                        return <li key={label}>{label}</li>;
+                      })}
                     </ul>
                   </dd>
                 </div>
