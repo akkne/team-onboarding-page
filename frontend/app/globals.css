@@ -79,6 +79,23 @@
   .particle-sphere:not([data-ready]) canvas {
     background: url("./assets/particle-sphere.webp") center / contain no-repeat;
   }
+  .sphere-labels li {
+    @apply top-1/2 left-1/2 -translate-1/2;
+  }
+  .sphere-labels li:first-child {
+    top: 29%;
+    left: 41%;
+  }
+  .sphere-labels li:nth-child(2) {
+    left: 62%;
+  }
+  .sphere-labels li:nth-child(3) {
+    top: 71%;
+    left: 43%;
+  }
+  .particle-sphere[data-ready] .sphere-labels li {
+    @apply top-1/2 left-1/2;
+  }
   .hero-title {
     @apply max-w-[6em] text-[clamp(3.5rem,8.6vw,8.5rem)] leading-[0.89] font-medium tracking-[-0.062em];
   }
