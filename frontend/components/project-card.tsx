@@ -9,7 +9,6 @@ const copy = {
 export function ProjectCard({ project, lang }: { project: Project; lang: Locale }) {
   const t = copy[lang];
   const title = project.title[lang];
-  const [intro, ...sections] = project.story;
 
   return (
     <article className="rounded-2xl border border-line bg-panel p-6 md:p-10">
@@ -31,27 +30,28 @@ export function ProjectCard({ project, lang }: { project: Project; lang: Locale 
           <span className="sr-only"> — {title}</span>
           <span aria-hidden="true" className="size-2 -translate-y-0.5 rotate-45 border-r-2 border-b-2 group-open:translate-y-0.5 group-open:rotate-225" />
         </summary>
-        <div className="mt-6 border-t border-line pt-6 md:mt-8 md:pt-8">
-          <div className="grid items-center gap-5 lg:grid-cols-[1.25fr_1fr] lg:gap-10">
-            <Image
-              src={project.screenshot.image[lang]}
-              alt={project.screenshot.alt[lang]}
-              sizes="(min-width: 1280px) 620px, (min-width: 1024px) 48vw, 90vw"
-              className="h-auto w-full rounded-xl border border-line"
-            />
-            <div>
-              <h4 className="card-title">{intro.heading[lang]}</h4>
-              <p className="body-copy mt-3 max-w-prose text-muted">{intro.text[lang]}</p>
-            </div>
-          </div>
-          <div className="mt-6 grid gap-x-10 gap-y-6 sm:grid-cols-2 md:mt-8">
-            {sections.map((section) => (
-              <div key={section.heading.en} className="border-t border-line pt-5">
-                <h4 className="card-title">{section.heading[lang]}</h4>
-                <p className="body-copy mt-3 max-w-prose text-muted">{section.text[lang]}</p>
+        <div className="mt-6 grid gap-x-10 gap-y-6 sm:grid-cols-2 md:mt-8">
+          {project.story.map(({ heading, text, screenshot }) => (
+            <div
+              key={heading.en}
+              className={screenshot
+                ? "grid items-center gap-5 border-t border-line pt-6 sm:col-span-2 lg:grid-cols-[1.25fr_1fr] lg:gap-10"
+                : "border-t border-line pt-5"}
+            >
+              {screenshot && (
+                <Image
+                  src={screenshot.image[lang]}
+                  alt={screenshot.alt[lang]}
+                  sizes="(min-width: 1280px) 620px, (min-width: 1024px) 48vw, 90vw"
+                  className="h-auto w-full rounded-xl border border-line"
+                />
+              )}
+              <div>
+                <h4 className="card-title">{heading[lang]}</h4>
+                <p className="body-copy mt-3 max-w-prose text-muted">{text[lang]}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </details>
     </article>
