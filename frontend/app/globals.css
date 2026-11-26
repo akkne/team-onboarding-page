@@ -89,7 +89,7 @@
       #0d0e10;
   }
   .particle-sphere {
-    @apply absolute right-0 bottom-0 aspect-square w-[min(78vw,19rem)] touch-pan-y select-none motion-reduce:pointer-events-none md:top-1/2 md:right-[2%] md:bottom-auto md:w-[min(57%,85svh,54rem)] md:-translate-y-1/2;
+    @apply absolute top-1/2 left-1/2 aspect-square -translate-1/2 w-[min(78vw,19rem)] touch-pan-y select-none motion-reduce:pointer-events-none md:w-[min(57%,85svh,54rem)] md:max-lg:max-w-md;
     background: radial-gradient(closest-side, #7176cf24, #7566b00d 85%, transparent);
   }
   .particle-sphere[data-ready] {
