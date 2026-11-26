@@ -1,4 +1,5 @@
 import { ParticleSphere } from "../../components/particle-sphere";
+import Image from "next/image";
 import { MemberCard } from "../../components/member-card";
 import { TeamEmblem } from "../../components/team-emblem";
 import { members, team, teamName } from "../../data/team";
@@ -207,11 +208,20 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                   key={project.title.ru}
                   className="grid overflow-hidden rounded-2xl border border-line bg-panel sm:grid-cols-[1fr_2fr]"
                 >
-                  <div
-                    aria-hidden="true"
-                    className="grid min-h-32 place-items-center bg-paper p-5 sm:min-h-64"
-                  >
-                    <TeamEmblem placement="cover" />
+                  <div className="relative min-h-44 overflow-hidden bg-panel sm:min-h-64">
+                    <Image
+                      src={project.image}
+                      alt={project.imageAlt[lang]}
+                      fill
+                      sizes="(max-width: 639px) 100vw, 40vw"
+                      className="object-cover object-top"
+                    />
+                    {project.brand === "dobropay" && (
+                      <div aria-hidden="true" className="project-brand">
+                        <span className="project-brand-mark" />
+                        <span>dobropay</span>
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-col items-start justify-center p-6 md:p-10">
                     <span className="meta text-lilac">{t[project.kind]}</span>
@@ -222,7 +232,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                       {project.description[lang]}
                     </p>
                     {project.href && (
-                      <a href={project.href} className="text-link mt-5">
+                      <a href={project.href} className="pill mt-5">
                         {t.view}
                         <span className="sr-only">
                           {" "}
