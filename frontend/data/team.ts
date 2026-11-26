@@ -56,36 +56,29 @@ export const team = {
     {
       title: { ru: "Визитка команды", en: "Team profile" },
       description: {
-        ru: "К отбору на «Волга.ТОП» мы собрали на одной странице людей, их работы и технологии, которыми пользуемся вместе.",
-        en: "For the Volga.TOP qualifiers, we built one page where you can meet the team, explore our work and see which tools we use together.",
+        ru: "Мы разработали сайт для отборочного этапа хакатона «Волга.ТОП». Члены жюри могут посмотреть работы команды, открыть их исходный код и узнать, какую роль выполняет каждый из четырёх участников.",
+        en: "We built this site for the qualifying round of the Volga.TOP hackathon. Judges can review our projects, inspect the source code and see what each of the four team members contributes.",
       },
       screenshot: {
         image: { ru: teamHomeRu, en: teamHomeEn },
         alt: {
-          ru: "Первый экран визитки с девизом команды и сферой из частиц, на которой видны названия технологий.",
-          en: "The team homepage with our motto and a sphere of particles labelled with the technologies we use.",
+          ru: "Сфера справа от девиза команды показывает названия технологий.",
+          en: "A sphere to the right of the team motto displays the names of technologies we use.",
         },
       },
       story: [
         {
-          heading: { ru: "Знакомство с командой", en: "Meet the people behind the projects" },
+          heading: { ru: "Посетители могут читать портфолио без JavaScript", en: "Visitors can read the portfolio without JavaScript" },
           text: {
-            ru: "Мы познакомились в Бауманке. Когда готовились к отбору, хотели показать, как наши навыки дополняют друг друга. Поэтому у каждого участника есть карточка с его ролью и достижениями, а у каждой работы — свой рассказ. Жюри может начать с проекта и тут же познакомиться с людьми, которые его сделали.",
-            en: "We met at Bauman University. When we entered the qualifiers, we wanted to show how our skills fit together. Each team member has a card with their role and achievements, and each project has its own story. Judges can start with a project and meet the people who built it on the same page.",
+            ru: "Мы храним сведения об участниках, описания проектов и переводы в одном файле TypeScript. Next.js при сборке создаёт из этих данных две HTML-страницы. Посетитель может переключить язык по ссылке и раскрыть описание проекта, даже если браузер блокирует скрипты.",
+            en: "We keep member profiles, project descriptions and translations in one TypeScript file. Next.js generates two HTML pages from that file at build time. Visitors can follow a link to switch languages and expand each project description even if their browser blocks scripts.",
           },
         },
         {
-          heading: { ru: "Два языка, одна страница", en: "One page in two languages" },
+          heading: { ru: "Сфера показывает технологии команды", en: "The sphere displays the technologies we use" },
           text: {
-            ru: "Мы храним роли, проекты и переводы в одном файле TypeScript. При сборке Next.js создаёт из него русскую и английскую страницы. Проекты можно раскрывать, а язык переключать даже без JavaScript. Для интерактивной сферы мы берём названия прямо из списка навыков команды.",
-            en: "We keep roles, projects and translations in one TypeScript file. At build time, Next.js uses it to generate the Russian and English pages. Visitors can expand a project or switch languages with JavaScript turned off. The interactive sphere draws its labels from our shared list of skills.",
-          },
-        },
-        {
-          heading: { ru: "Как мы обновляем сайт", en: "How we update the site" },
-          text: {
-            ru: "Чтобы добавить работу в портфолио, мы заполняем её карточку на двух языках. GitHub Actions проверяет код, типы и сборку перед слиянием. Готовую визитку запускаем одним контейнером через Docker Compose.",
-            en: "To publish a project, we write its card in both languages. GitHub Actions checks the code, types and production build before we merge. We run the site in a single container with Docker Compose.",
+            ru: "Мы нарисовали сферу из частиц с помощью Canvas 2D. Посетитель может вращать её мышью или пальцем. Сфера берёт подписи из раздела «Навыки», поэтому новая технология появляется и в списке, и на сфере после одной правки.",
+            en: "We used Canvas 2D to draw the sphere from individual particles. Visitors can drag it with a mouse or a finger to rotate it. The sphere takes its labels from the Skills section, so adding a technology to the list also adds it to the animation.",
           },
         },
       ],
@@ -95,50 +88,36 @@ export const team = {
     {
       title: { ru: "Dobropay", en: "Dobropay" },
       description: {
-        ru: "Мы сделали платёжную песочницу, в которой магазин связывает оплату с заказом и узнаёт результат, даже если покупатель уже закрыл страницу.",
-        en: "We built a payment sandbox that ties each payment to an order and tells the shop what happened, even after the customer closes the page.",
+        ru: "Dobropay связывает заказ интернет-магазина с платежом по API. Магазин получает уведомление о смене статуса на свой сервер, даже если покупатель уже закрыл страницу оплаты.",
+        en: "Dobropay links an online order to a payment through an API. The shop receives status updates on its own server even after the customer closes the checkout page.",
       },
       screenshot: {
         image: { ru: dobropayHome, en: dobropayHome },
         alt: {
-          ru: "Главная Dobropay показывает покупку керамической кружки за 1 800 ₽, оплату через СБП и подтверждение заказа.",
-          en: "The Dobropay homepage shows a 1,800-ruble mug order, its Faster Payments System checkout and the order confirmation.",
+          ru: "Главная страница Dobropay показывает заказ керамической кружки за 1 800 ₽ и выбор оплаты через СБП.",
+          en: "The Dobropay homepage shows an order for a ceramic mug priced at 1,800 rubles and the option to pay through Russia’s Faster Payments System.",
         },
       },
       story: [
         {
-          heading: { ru: "Что видят магазин и покупатель", en: "What the shop and the customer see" },
+          heading: { ru: "Мы разработали семь микросервисов на .NET 10", en: "We built seven microservices on .NET 10" },
           text: {
-            ru: "Магазин передаёт номер заказа и сумму по API, а в ответ получает ссылку на оплату. Покупатель открывает её и проходит тестовую оплату. Роль банка в песочнице играет наш симулятор. Он подтверждает результат, магазин получает подписанное уведомление по HTTP, а при успешной оплате покупателю мы готовим демо-квитанцию.",
-            en: "The shop sends an order number and amount to our API and gets a checkout link. The customer opens the link and makes a test payment. Our simulator plays the bank’s role in the sandbox. When it confirms the outcome, the shop receives a signed webhook and we prepare a demo receipt for the customer after a successful payment.",
+            ru: "Auth проверяет учётные данные сотрудников, а DeveloperApi управляет магазинами и ключами API. Payments ведёт учёт платежей, Notifications доставляет уведомления магазинам, а Receipts хранит чеки. Каждый из этих пяти сервисов использует собственную базу PostgreSQL. MerchantAdmin собирает данные для личного кабинета через внутренние API, а Email отправляет письма по SMTP.",
+            en: "Auth verifies staff credentials, and DeveloperApi manages shops and API keys. Payments tracks payments, Notifications delivers updates to shops, and Receipts stores receipts. Each of these five services has its own PostgreSQL database. MerchantAdmin gathers data for the merchant dashboard through internal APIs, and Email sends messages over SMTP.",
           },
         },
         {
-          heading: { ru: "Если запрос пришёл дважды", en: "When a request arrives twice" },
+          heading: { ru: "Магазин может повторить запрос после обрыва связи", en: "A shop can retry a request after a connection failure" },
           text: {
-            ru: "Если связь оборвалась после создания платежа, магазин может повторить тот же запрос с тем же Idempotency-Key. Мы вернём уже созданный платёж. Его статус и событие для Apache Kafka записываем одной транзакцией в PostgreSQL. Если брокер временно недоступен, событие дождётся отправки в Outbox. На стороне получателя Inbox распознает повтор по идентификатору события.",
-            en: "If the connection drops after a payment is created, the shop can retry the same request with the same Idempotency-Key. We return the existing payment. We save its status change and the event for Apache Kafka in one PostgreSQL transaction. If the broker is down, the event waits in the outbox. Each consumer uses its inbox to recognise an event it has already processed.",
+            ru: "Магазин указывает уникальный ключ в заголовке Idempotency-Key при создании платежа. Сервис Payments возвращает сведения об уже созданном платеже, если магазин повторяет тот же запрос с тем же ключом. Сервис отклоняет запрос с кодом HTTP 409, если магазин использует прежний ключ для другой суммы.",
+            en: "The shop sends an Idempotency-Key header when it creates a payment. Payments returns the existing payment details if the shop retries the same request with the same key. The API returns HTTP 409 if the shop reuses that key for a different amount.",
           },
         },
         {
-          heading: { ru: "Семь сервисов и пять баз", en: "Seven services and five databases" },
+          heading: { ru: "Сервис уведомлений повторяет доставку при сбое", en: "The notification service retries failed deliveries" },
           text: {
-            ru: "Бэкенд мы разделили на семь микросервисов на .NET 10. У пяти из них своя база PostgreSQL 17. Auth хранит сессии, DeveloperApi — магазины и ключи, Payments — платежи, Notifications — подписки и доставки, Receipts — квитанции. Двум другим сервисам база не нужна. MerchantAdmin собирает данные для кабинета через внутренние API, а Email отправляет письма по SMTP.",
-            en: "We split the .NET 10 backend into seven microservices. Five own a PostgreSQL 17 database each. Auth stores sessions, DeveloperApi manages shops and keys, Payments tracks payments, Notifications owns subscriptions and deliveries, and Receipts stores receipts. MerchantAdmin calls the other services’ APIs to build the dashboard, and Email sends mail over SMTP. Neither needs its own database.",
-          },
-        },
-        {
-          heading: { ru: "Как магазин узнаёт результат", en: "How the shop gets the result" },
-          text: {
-            ru: "В Kafka мы разделили сообщения провайдера и изменения статуса платежей по разным топикам. Notifications подписывает webhook и повторяет доставку при сбое. В Redis 7.4 держим ключ с коротким сроком жизни для каждого магазина, чтобы ограничить частоту отправки. За актуальным статусом кабинет обращается к Payments, где он хранится в PostgreSQL.",
-            en: "Kafka carries provider callbacks and payment status changes in separate topics. Notifications signs each webhook and retries failed deliveries. We keep a short-lived key per shop in Redis 7.4 to limit how often we send webhooks. For the latest payment status, the dashboard asks Payments, which keeps the record in PostgreSQL.",
-          },
-        },
-        {
-          heading: { ru: "Как устроен демостенд", en: "Inside the demo environment" },
-          text: {
-            ru: "Кабинет и страницу оплаты мы сделали на Next.js. Caddy направляет запросы к интерфейсу и API, а Mailpit принимает тестовые письма с квитанциями по SMTP. Docker Compose поднимает контейнеры, запускает миграции и проверяет готовность сервисов. Так мы можем пройти весь путь заказа на одном стенде.",
-            en: "We built the merchant dashboard and checkout with Next.js. Caddy routes requests to the frontend and APIs, and Mailpit catches test receipt emails over SMTP. Docker Compose starts the containers, runs migrations and checks service readiness, so we can follow an order from checkout to receipt in one environment.",
+            ru: "Payments сохраняет новый статус платежа и событие для Apache Kafka в одной транзакции PostgreSQL. Notifications получает событие из Kafka и отправляет магазину HTTP-уведомление с подписью HMAC-SHA256. Сервис сохраняет результат каждой попытки и повторяет отправку, если сервер магазина временно недоступен.",
+            en: "Payments saves the new payment status and its Apache Kafka event in a single PostgreSQL transaction. Notifications reads the event from Kafka and sends the shop a webhook signed with HMAC-SHA256. The service records each delivery attempt and retries if the shop’s server is temporarily unavailable.",
           },
         },
       ],
