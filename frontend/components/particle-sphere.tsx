@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import type { Locale } from "../data/team";
 import { sphereLabels } from "../data/sphere-labels";
 import { createSphereScene } from "./sphere-scene";
+import { trackSphereMotion } from "./sphere-motion";
 
 export function ParticleSphere({ lang }: { lang: Locale }) {
   const container = useRef<HTMLDivElement>(null);
@@ -16,6 +17,7 @@ export function ParticleSphere({ lang }: { lang: Locale }) {
 
     const draw = createSphereScene(context, Array.from(element.querySelectorAll("li")));
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const movement = trackSphereMotion(element);
     let visible = false;
     let size = 0;
     let frame = 0;
@@ -24,9 +26,11 @@ export function ParticleSphere({ lang }: { lang: Locale }) {
 
     function animate(now: number) {
       if (now - previous >= 1000 / 30) {
-        time += previous ? Math.min(now - previous, 100) / 1000 : 0;
+        const dt = previous ? Math.min(now - previous, 100) / 1000 : 0;
+        time += dt;
+        movement.advance(dt);
         previous = now;
-        draw(size, time);
+        draw(size, time, movement.pose);
       }
       frame = requestAnimationFrame(animate);
     }
@@ -45,7 +49,7 @@ export function ParticleSphere({ lang }: { lang: Locale }) {
       const pixels = Math.round(size * Math.min(window.devicePixelRatio, 2));
       canvas.width = canvas.height = pixels;
       context.setTransform(pixels / size, 0, 0, pixels / size, 0, 0);
-      draw(size, time);
+      draw(size, time, movement.pose);
       element.dataset.ready = "";
       sync();
     });
@@ -59,6 +63,7 @@ export function ParticleSphere({ lang }: { lang: Locale }) {
     document.addEventListener("visibilitychange", sync);
     return () => {
       cancelAnimationFrame(frame);
+      movement.disconnect();
       resize.disconnect();
       observer.disconnect();
       motion.removeEventListener("change", sync);
@@ -67,7 +72,7 @@ export function ParticleSphere({ lang }: { lang: Locale }) {
   }, []);
 
   return (
-    <div ref={container} className="particle-sphere group pointer-events-none">
+    <div ref={container} className="particle-sphere group">
       <canvas aria-hidden="true" className="block size-full" />
       {sphereLabels.length > 0 && (
         <ul className="absolute inset-0 flex flex-col items-center justify-center gap-1">
