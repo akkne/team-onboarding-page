@@ -29,8 +29,8 @@ export const team = {
   event: { ru: "Волга.ТОП", en: "Volga.TOP" },
   year: 2026,
   motto: {
-    ru: "Дизайн, аналитика и разработка в одной команде.",
-    en: "Design, analysis and development in one team.",
+    ru: "Мы построим вам вашу компанию",
+    en: "We’ll build your company for you",
   },
   contact: repository + "/issues",
   repository,

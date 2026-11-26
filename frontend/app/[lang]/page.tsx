@@ -14,7 +14,6 @@ const copy = {
     language: "Язык страницы",
     menu: "Разделы страницы",
     skip: "Перейти к содержимому",
-    round: "Отборочный этап",
     meet: "Познакомиться с командой",
     project: "Проект",
     idea: "Идея",
@@ -31,7 +30,6 @@ const copy = {
     language: "Page language",
     menu: "Page sections",
     skip: "Skip to content",
-    round: "Qualifying round",
     meet: "Meet the team",
     project: "Project",
     idea: "Idea",
@@ -46,9 +44,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const t = copy[lang];
   const sections = [
     ["about", lang === "ru" ? "О нас" : t.about],
+    ...(team.projects.length ? [["projects", t.projects]] : []),
     ["members", t.members],
     ["skills", t.skills],
-    ...(team.projects.length ? [["projects", t.projects]] : []),
     ["contact", t.contact],
   ];
 
@@ -112,8 +110,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <ParticleSphere labels={getSphereLabels()} />
           <div className="shell pointer-events-none relative flex min-h-[36rem] flex-col items-start pt-12 pb-44 sm:min-h-[40rem] md:justify-center md:py-24 [&>*]:pointer-events-auto lg:min-h-[clamp(38rem,74svh,54rem)]">
             <p className="meta mb-7 text-mint">
-              <span className="inline-block">{team.event[lang]} {team.year}</span>{" "}
-              <span className="inline-block">{t.round}</span>
+              {team.event[lang]} {team.year}
             </p>
             <h1 id="hero-title" lang="en" className="hero-title">
               {teamName}
@@ -140,6 +137,41 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             </p>
           </div>
         </section>
+        {team.projects.length > 0 && (
+          <section
+            id="projects"
+            aria-labelledby="projects-title"
+            className="shell section-space"
+          >
+            <h2 id="projects-title" className="section-title mb-9">
+              {t.projects}
+            </h2>
+            <div className="grid gap-4">
+              {team.projects.map((project) => (
+                <article
+                  key={project.title.ru}
+                  className="overflow-hidden rounded-2xl border border-line bg-panel"
+                >
+                  <div className="flex flex-col items-start justify-center p-6 md:p-10">
+                    <span className="meta text-lilac">{t[project.kind]}</span>
+                    <h3 className="card-title mt-3">
+                      {project.title[lang]}
+                    </h3>
+                    <p className="body-copy mt-3 max-w-prose text-muted">
+                      {project.description[lang]}
+                    </p>
+                    {project.href && (
+                      <a href={project.href} className="pill mt-5">
+                        {t.view}
+                        <span className="sr-only"> {project.title[lang]}</span>
+                      </a>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
         <section
           id="members"
           aria-labelledby="members-title"
@@ -182,41 +214,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             </dl>
           </div>
         </section>
-        {team.projects.length > 0 && (
-          <section
-            id="projects"
-            aria-labelledby="projects-title"
-            className="shell section-space"
-          >
-            <h2 id="projects-title" className="section-title mb-9">
-              {t.projects}
-            </h2>
-            <div className="grid gap-4">
-              {team.projects.map((project) => (
-                <article
-                  key={project.title.ru}
-                  className="overflow-hidden rounded-2xl border border-line bg-panel"
-                >
-                  <div className="flex flex-col items-start justify-center p-6 md:p-10">
-                    <span className="meta text-lilac">{t[project.kind]}</span>
-                    <h3 className="card-title mt-3">
-                      {project.title[lang]}
-                    </h3>
-                    <p className="body-copy mt-3 max-w-prose text-muted">
-                      {project.description[lang]}
-                    </p>
-                    {project.href && (
-                      <a href={project.href} className="pill mt-5">
-                        {t.view}
-                        <span className="sr-only"> {project.title[lang]}</span>
-                      </a>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        )}
       </main>
       <footer id="contact" className="bg-lilac text-ink">
         <div className="shell section-space flex flex-wrap items-center justify-between gap-8">
