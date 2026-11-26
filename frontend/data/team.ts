@@ -1,9 +1,6 @@
 import type { StaticImageData } from "next/image";
 import dobropayHome from "../app/assets/projects/dobropay.webp";
 import qaAgentActivity from "../app/assets/projects/qa-agent-activity.webp";
-import qaAgentResult from "../app/assets/projects/qa-agent-result.webp";
-import teamHomeEn from "../app/assets/projects/team-en.webp";
-import teamHomeRu from "../app/assets/projects/team-ru.webp";
 
 export const teamName = "recessed maxilla team";
 
@@ -33,7 +30,7 @@ interface StorySection {
 export interface Project {
   title: Translation;
   description: Translation;
-  story: [StorySection & { screenshot: ProjectScreenshot }, ...StorySection[]];
+  story?: [StorySection & { screenshot: ProjectScreenshot }, ...StorySection[]];
   kind: "project" | "idea";
   href?: string;
 }
@@ -66,29 +63,6 @@ export const team = {
         ru: "Мы разработали сайт для отборочного этапа хакатона «Волга.ТОП». Члены жюри могут посмотреть работы команды, открыть их исходный код и узнать, какую роль выполняет каждый из четырёх участников.",
         en: "We built this site for the qualifying round of the Volga.TOP hackathon. Judges can review our projects, inspect the source code and see what each of the four team members contributes.",
       },
-      story: [
-        {
-          screenshot: {
-            image: { ru: teamHomeRu, en: teamHomeEn },
-            alt: {
-              ru: "Сфера справа от девиза команды показывает названия технологий.",
-              en: "A sphere to the right of the team motto displays the names of technologies we use.",
-            },
-          },
-          heading: { ru: "Посетители могут читать портфолио без JavaScript", en: "Visitors can read the portfolio without JavaScript" },
-          text: {
-            ru: "Мы храним сведения об участниках, описания проектов и переводы в одном файле TypeScript. Next.js при сборке создаёт из этих данных две HTML-страницы. Посетитель может переключить язык по ссылке и раскрыть описание проекта, даже если браузер блокирует скрипты.",
-            en: "We keep member profiles, project descriptions and translations in one TypeScript file. Next.js generates two HTML pages from that file at build time. Visitors can follow a link to switch languages and expand each project description even if their browser blocks scripts.",
-          },
-        },
-        {
-          heading: { ru: "Сфера показывает технологии команды", en: "The sphere displays the technologies we use" },
-          text: {
-            ru: "Мы нарисовали сферу из частиц с помощью Canvas 2D. Посетитель может вращать её мышью или пальцем. Сфера берёт подписи из раздела «Навыки», поэтому новая технология появляется и в списке, и на сфере после одной правки.",
-            en: "We used Canvas 2D to draw the sphere from individual particles. Visitors can drag it with a mouse or a finger to rotate it. The sphere takes its labels from the Skills section, so adding a technology to the list also adds it to the animation.",
-          },
-        },
-      ],
       kind: "project",
       href: repository,
     },
@@ -164,20 +138,6 @@ export const team = {
           text: {
             ru: "Агент вызывает модель через Codex CLI с учётной записью ChatGPT. Команда с подпиской, в которую входит Codex, может проверять изменения в пределах лимитов тарифа без отдельной оплаты токенов по API. Отчёт показывает расход входных и выходных токенов по каждому запуску.",
             en: "The agent calls the model through Codex CLI using a ChatGPT account. A team with an eligible subscription can use its included allowance for checks without a separate API token charge. Each run report shows how many input and output tokens the model used.",
-          },
-        },
-        {
-          heading: { ru: "Проверка из 663 тестов заняла две с половиной минуты", en: "The agent ran 663 tests in two and a half minutes" },
-          text: {
-            ru: "Агент добавил два теста для новой команды /ping и запустил их вместе с остальным набором. Все 663 теста прошли, а весь цикл до публикации отчёта занял 150,7 секунды. Команда может открыть отчёт по коммиту и проверить результат по журналу команд.",
-            en: "The agent wrote two tests for a new /ping command and ran them alongside the existing suite. All 663 tests passed, and the full run through report publication took 150.7 seconds. The team can open the report for the commit and verify the result against the command log.",
-          },
-          screenshot: {
-            image: { ru: qaAgentResult, en: qaAgentResult },
-            alt: {
-              ru: "Журнал фиксирует сборку двух новых тестов, результат всех 663 проверок без падений и публикацию отчёта за 150,7 секунды.",
-              en: "The run log records two new tests compiling, all 663 tests passing and the report being published within 150.7 seconds.",
-            },
           },
         },
       ],
