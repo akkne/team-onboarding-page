@@ -73,7 +73,7 @@ export function ParticleSphere({ labels }: { labels: readonly string[] }) {
       {labels.length > 0 && (
         <ul aria-hidden="true" className="sphere-labels pointer-events-none absolute inset-0">
           {labels.slice(0, 3).map((label, slot) => (
-            <li key={slot} className="absolute max-w-[44%] rounded-sm bg-ink/85 px-2 py-1 text-center text-xs leading-tight text-paper">
+            <li key={slot} className="fine-print absolute max-w-[44%] rounded-sm bg-ink/85 px-2 py-1 text-center text-paper">
               {label}
             </li>
           ))}

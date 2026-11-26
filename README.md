@@ -27,7 +27,7 @@
 | --- | --- |
 | Язык | TypeScript |
 | Интерфейс | Next.js 16.4.6, React 19 |
-| Стили | Tailwind CSS 4, PostCSS, локальный шрифт Inter |
+| Стили | Tailwind CSS 4, PostCSS, типографика по референсу Solana |
 | Среда разработки | Node.js 22, npm |
 | Проверки | ESLint, TypeScript, сборка Next.js |
 | Контейнеризация | Docker, Docker Compose |

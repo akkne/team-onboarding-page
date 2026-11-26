@@ -65,12 +65,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <a
             href={`/${lang}`}
             aria-label={teamName}
-            className="flex items-center gap-2 text-[1.5rem] font-semibold tracking-[-0.065em]"
+            className="card-title flex items-center gap-2"
           >
             <TeamEmblem placement="header" />
-            <span lang="en" className="tracking-[-0.02em]">
-              rm.team
-            </span>
+            <span lang="en">rm.team</span>
           </a>
           <nav
             aria-label={t.menu}
@@ -80,7 +78,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               <a
                 key={id}
                 href={`#${id}`}
-                className="py-2 text-sm font-medium text-muted hover:text-paper"
+                className="caption py-2 font-medium text-muted hover:text-paper"
               >
                 {label}
               </a>
@@ -98,7 +96,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                 hrefLang={locale}
                 aria-label={locale === "ru" ? "Русский" : "English"}
                 aria-current={locale === lang ? "page" : undefined}
-                className="rounded-full px-3 py-1.5 text-sm font-medium text-muted hover:text-paper aria-[current=page]:bg-paper aria-[current=page]:text-ink"
+                className="caption rounded-full px-3 py-1.5 font-medium text-muted hover:text-paper aria-[current=page]:bg-paper aria-[current=page]:text-ink"
               >
                 {locale.toUpperCase()}
               </a>
@@ -113,17 +111,14 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         >
           <ParticleSphere labels={getSphereLabels()} />
           <div className="shell pointer-events-none relative flex min-h-[36rem] flex-col items-start pt-12 pb-44 sm:min-h-[40rem] md:justify-center md:py-24 [&>*]:pointer-events-auto lg:min-h-[clamp(38rem,74svh,54rem)]">
-            <p className="meta mb-7 flex flex-wrap items-center gap-3 text-mint">
-              <span>
-                {team.event[lang]} {team.year}
-              </span>
-              <span aria-hidden="true" className="h-3 w-px bg-mint/50" />
-              {t.round}
+            <p className="meta mb-7 text-mint">
+              <span className="inline-block">{team.event[lang]} {team.year}</span>{" "}
+              <span className="inline-block">{t.round}</span>
             </p>
             <h1 id="hero-title" lang="en" className="hero-title">
               {teamName}
             </h1>
-            <p className="mt-6 max-w-[30ch] text-xl leading-snug tracking-tight text-paper md:text-2xl">
+            <p className="lead mt-6 max-w-[30ch] font-medium text-paper">
               {team.motto[lang]}
             </p>
             <a href="#members" className="pill mt-8">
@@ -137,14 +132,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           className="border-b border-line"
         >
           <div className="shell section-space grid items-baseline gap-6 md:grid-cols-[1fr_2fr]">
-            <h2
-              id="about-title"
-              className="meta flex items-center gap-3 text-mint"
-            >
-              <span aria-hidden="true" className="h-px w-8 bg-current" />
+            <h2 id="about-title" className="meta text-mint">
               {t.about}
             </h2>
-            <p className="max-w-[38ch] text-[clamp(1.55rem,2.7vw,2.75rem)] leading-[1.18] tracking-[-0.045em]">
+            <p className="intro max-w-[38ch]">
               {team.about[lang]}
             </p>
           </div>
@@ -180,7 +171,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                 >
                   <dt className="meta text-mint">{category}</dt>
                   <dd>
-                    <ul className="flex flex-wrap gap-x-6 gap-y-1 text-lg tracking-tight md:text-xl">
+                    <ul className="body-copy flex flex-wrap gap-x-6 gap-y-1">
                       {items.map((item) => (
                         <li key={item}>{item}</li>
                       ))}
@@ -208,19 +199,16 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                 >
                   <div className="flex flex-col items-start justify-center p-6 md:p-10">
                     <span className="meta text-lilac">{t[project.kind]}</span>
-                    <h3 className="mt-3 text-3xl font-medium tracking-tight">
+                    <h3 className="card-title mt-3">
                       {project.title[lang]}
                     </h3>
-                    <p className="mt-3 max-w-prose leading-relaxed text-muted">
+                    <p className="body-copy mt-3 max-w-prose text-muted">
                       {project.description[lang]}
                     </p>
                     {project.href && (
                       <a href={project.href} className="pill mt-5">
                         {t.view}
-                        <span className="sr-only">
-                          {" "}
-                          - {project.title[lang]}
-                        </span>
+                        <span className="sr-only"> {project.title[lang]}</span>
                       </a>
                     )}
                   </div>
