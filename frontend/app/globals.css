@@ -63,22 +63,53 @@
     @apply bg-mint;
   }
   .hero {
-    background-color: #000;
-    background-image: linear-gradient(90deg, #000 0%, #000b 36%, transparent 65%), url("./assets/volga-ribbon.webp");
-    background-size: 100% 100%, cover;
-    background-position: center, center;
-    background-repeat: no-repeat;
+    background:
+      linear-gradient(90deg, transparent calc(50% - .5px), #c6c3e019 50%, transparent calc(50% + .5px)),
+      linear-gradient(0deg, transparent calc(50% - .5px), #c6c3e017 50%, transparent calc(50% + .5px)),
+      radial-gradient(ellipse at 50% 54%, #171622, transparent 60%),
+      #0d0e10;
+  }
+  .particle-sphere {
+    @apply relative order-1 mx-auto my-3 aspect-square w-full max-w-[27rem];
+    background: radial-gradient(closest-side, #7176cf24, #7566b00d 85%, transparent);
+  }
+  .particle-sphere:not([data-ready]) canvas {
+    background: url("./assets/particle-sphere.webp") center / contain no-repeat;
   }
   .hero-title {
-    @apply max-w-[6em] text-[clamp(3.5rem,8.6vw,8.5rem)] leading-[0.89] font-medium tracking-[-0.062em];
+    @apply relative mt-6 text-[clamp(3.65rem,10vw,9rem)] leading-[0.94] font-normal tracking-[-0.075em];
   }
-  @media (max-width: 47.99rem) {
-    .hero {
-      background-size: 100% 100%, auto 64%;
-      background-position: center, 78% bottom;
-      background-image:
-        linear-gradient(to bottom, #000 40%, #000d 48%, transparent 78%),
-        url("./assets/volga-ribbon.webp");
+  .hero-action {
+    @apply relative order-2;
+  }
+  @media (min-width: 48rem) {
+    .hero-layout {
+      min-height: max(39rem, calc(100svh - 4.6rem));
+    }
+    .particle-sphere {
+      @apply absolute top-1/2 left-1/2 my-0 max-w-none -translate-1/2;
+      width: min(63%, 86svh, 62rem);
+    }
+    .hero-event {
+      @apply absolute top-[8%] left-[6%];
+    }
+    .hero-title {
+      @apply pointer-events-none absolute inset-0 m-0 text-[clamp(4.4rem,7.6vw,9rem)];
+    }
+    .hero-title span {
+      @apply pointer-events-auto absolute;
+    }
+    .hero-title span:nth-child(1) {
+      @apply top-[17%] left-[9%];
+    }
+    .hero-title span:nth-child(2) {
+      @apply top-[34%] left-[64%];
+    }
+    .hero-title span:nth-child(3) {
+      @apply bottom-[20%] left-[17%];
+    }
+    .hero-action {
+      @apply absolute right-[3%] bottom-[16%] left-[60%] lg:left-[69%];
     }
   }
 }
