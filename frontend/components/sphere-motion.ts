@@ -1,3 +1,5 @@
+const autoTurnSeconds = 20;
+
 // Pointer coordinates are fractions of the canvas so the response scales with the sphere.
 export function trackSphereMotion(surface: HTMLElement) {
   const pose = { yaw: 0, pitch: -0.08, pointerX: 0.5, pointerY: 0.5, influence: 0, stretchX: 0, stretchY: 0, expansion: 0 };
@@ -60,7 +62,7 @@ export function trackSphereMotion(surface: HTMLElement) {
     pose,
     advance(dt: number) {
       const ease = 1 - Math.exp(-9 * dt);
-      pose.yaw += dt * 0.14;
+      pose.yaw += dt * (2 * Math.PI / autoTurnSeconds);
       if (dragging === null) {
         pose.yaw += yawSpeed * dt;
         pose.pitch = clamp(pose.pitch + pitchSpeed * dt, 1.1);
