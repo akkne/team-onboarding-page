@@ -7,7 +7,7 @@ export function MemberCard({ member, lang }: { member: Member; lang: Locale }) {
   const initials = words[0][0] + words[lang === "ru" ? 1 : words.length - 1][0];
 
   return (
-    <article className="member-card h-full rounded-2xl border border-line bg-panel p-6 lg:p-7">
+    <article className="member-card flex h-full flex-col rounded-2xl border border-line bg-panel p-6 lg:p-7">
       <div className="mb-8 flex items-center justify-between gap-4">
         {member.photo ? (
           <Image
@@ -34,13 +34,15 @@ export function MemberCard({ member, lang }: { member: Member; lang: Locale }) {
         className="body-copy mt-4 list-disc space-y-2 pl-5 text-muted"
       >
         {member.achievements.map((achievement) => (
-          <li key={achievement.en}>{achievement[lang]}</li>
+          <li key={achievement.en} lang={achievement.ru ? lang : "en"}>
+            {achievement[lang] ?? achievement.en}
+          </li>
         ))}
       </ul>
-      <ul className="mt-5 flex flex-wrap gap-2">
+      <ul lang="en" className="mt-auto flex flex-wrap gap-2 pt-5">
         {member.skills.map((skill) => (
-          <li key={skill.ru} className="tag">
-            {skill[lang]}
+          <li key={skill} className="tag">
+            {skill}
           </li>
         ))}
       </ul>

@@ -7,9 +7,9 @@ export interface Member {
   name: Translation;
   role: string;
   group: string;
-  achievements: Translation[];
+  achievements: { en: string; ru?: string }[];
   photo?: string;
-  skills: Translation[];
+  skills: string[];
 }
 
 interface Project {
@@ -94,10 +94,7 @@ export const members: Member[] = [
     name: { ru: "Стукалов Артём Андреевич", en: "Artyom Andreyevich Stukalov" },
     role: "Designer, Technical Writer",
     group: "ИУ5-12/4",
-    skills: [
-      { ru: "Дизайн", en: "Design" },
-      { ru: "Документация", en: "Documentation" },
-    ],
+    skills: ["Design", "Documentation"],
     achievements: [
       {
         ru: "Входит в команду дизайнеров МГТУ им. Н. Э. Баумана.",
@@ -111,12 +108,9 @@ export const members: Member[] = [
   },
   {
     name: { ru: "Стёпкин Артемий Юрьевич", en: "Artemiy Yuryevich Styopkin" },
-    role: "Team Lead, Tech Lead, Backend Developer",
+    role: "Team Lead, Tech Lead",
     group: "ИУ5-12/4",
-    skills: [
-      { ru: "Координация", en: "Coordination" },
-      { ru: "Техлидство", en: "Technical leadership" },
-    ],
+    skills: ["Coordination", "Technical leadership", "Backend"],
     achievements: [
       {
         ru: "1,5 года в продуктовой бэкенд-разработке.",
@@ -126,17 +120,14 @@ export const members: Member[] = [
         ru: "Победитель Московской предпрофессиональной олимпиады школьников 2026 года по информатике.",
         en: "Winner, Moscow Pre-Professional Olympiad for Schoolchildren 2026 (CS Track).",
       },
-      {
-        ru: "Сооснователь Sellevate.",
-        en: "Co-founder of Sellevate.",
-      },
+      { en: "Co-founder of Sellevate." },
     ],
   },
   {
     name: { ru: "Зеленко Артур Олегович", en: "Artur Olegovich Zelenko" },
     role: "Frontend Developer",
     group: "ИУ5-12/4",
-    skills: [{ ru: "Фронтенд", en: "Frontend development" }],
+    skills: ["Frontend development"],
     achievements: [
       {
         ru: "Входит в команду разработчиков МГТУ им. Н. Э. Баумана.",
@@ -152,10 +143,7 @@ export const members: Member[] = [
     name: { ru: "Верховых Егор Дмитриевич", en: "Egor Dmitrievich Verkhovykh" },
     role: "CEO, Analyst",
     group: "ИУ5-13/4",
-    skills: [
-      { ru: "Аналитика", en: "Analysis" },
-      { ru: "Редактура", en: "Editing" },
-    ],
+    skills: ["Analysis", "Editing"],
     achievements: [
       {
         ru: "Победитель хакатона «Энергия города — в дело».",
