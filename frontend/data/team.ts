@@ -1,6 +1,7 @@
 import type { StaticImageData } from "next/image";
 import dobropayHome from "../app/assets/projects/dobropay.webp";
 import qaAgentActivity from "../app/assets/projects/qa-agent-activity.webp";
+import sellevateHome from "../app/assets/projects/sellevate.webp";
 
 export const teamName = "recessed maxilla team";
 
@@ -144,6 +145,45 @@ export const team = {
       kind: "project",
       href: "https://github.com/akkne/qa-tester-agent",
     },
+    {
+      title: { ru: "Sellevate", en: "Sellevate" },
+      description: {
+        ru: "Артемий Стёпкин развивает Sellevate как сооснователь и технический руководитель. Платформа помогает компаниям обучать отделы продаж с помощью ИИ-агентов. Менеджеры тренируются отвечать на возражения покупателя до звонка реальному клиенту.",
+        en: "Artemiy Styopkin is the co-founder and tech lead of Sellevate, a B2B platform that uses AI agents to train sales teams. Sales reps practice responding to buyer objections before they speak to a customer.",
+      },
+      story: [
+        {
+          screenshot: {
+            image: { ru: sellevateHome, en: sellevateHome },
+            alt: {
+              ru: "Главная страница Sellevate показывает четыре возможности тренажёра, включая голосовые звонки и разбор каждой попытки.",
+              en: "The Sellevate homepage presents four training features, including voice calls and feedback on each attempt.",
+            },
+          },
+          heading: { ru: "Руководитель назначает практику и разбирает разговоры", en: "Sales managers assign practice and review conversations" },
+          text: {
+            ru: "Руководитель отдела выбирает сотрудников, задаёт срок задания и проходной балл. Менеджер ведёт диалог с ИИ-покупателем в чате или голосом и получает оценку своей попытки. Руководитель видит, кто достиг нужного результата, и может открыть конкретный разговор, чтобы обсудить ответ на возражение.",
+            en: "A sales manager assigns practice to selected reps and sets a deadline and a passing score. Each rep speaks or chats with an AI buyer and receives feedback on the attempt. The manager can see who reached the target and open a conversation to discuss how a rep handled an objection.",
+          },
+        },
+        {
+          heading: { ru: "ИИ-покупатель поддерживает голосовой диалог", en: "The AI buyer can carry on a voice conversation" },
+          text: {
+            ru: "Сервис ИИ передаёт речь менеджера в OpenAI Whisper для распознавания. Языковая модель формирует реплику от лица покупателя, а Yandex SpeechKit озвучивает ответ. Менеджер может повторить сценарий с другой формулировкой и сравнить обратную связь.",
+            en: "The AI service sends the rep’s speech to OpenAI Whisper for transcription. A language model generates the buyer’s reply, and Yandex SpeechKit reads it aloud. Reps can repeat the scenario, try a different approach and compare the feedback.",
+          },
+        },
+        {
+          heading: { ru: "Платформа распределяет задачи между десятью микросервисами", en: "Ten backend services run the platform" },
+          text: {
+            ru: "Шлюз YARP направляет запросы в сервисы обучения, компаний, организаций, учётных записей, ИИ, аналитики, уведомлений, общения и игровых достижений. Десятый сервис выполняет текстовые запросы через Codex CLI. Сервис обучения публикует события о завершении уроков в Apache Kafka, а сервис достижений по этим событиям обновляет прогресс сотрудника.",
+            en: "The YARP gateway routes requests to services for learning, customer companies, organizations, identity, AI, analytics, notifications, social features and gamification. A tenth service runs text requests through Codex CLI. The learning service publishes lesson completions to Apache Kafka, and the gamification service uses those events to update each rep’s progress.",
+          },
+        },
+      ],
+      kind: "project",
+      href: "https://github.com/akkne/sellevate",
+    },
   ] satisfies Project[],
   skills: [
     {
@@ -211,7 +251,10 @@ export const members: Member[] = [
         ru: "Победитель Московской предпрофессиональной олимпиады школьников 2026 года по информатике.",
         en: "Winner, Moscow Pre-Professional Olympiad for Schoolchildren 2026 (CS Track).",
       },
-      { en: "Co-founder of Sellevate." },
+      {
+        ru: "Артемий руководит разработкой Sellevate как сооснователь проекта.",
+        en: "Artemiy co-founded Sellevate and leads its engineering team.",
+      },
     ],
   },
   {
