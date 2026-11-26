@@ -1,6 +1,5 @@
 import { getSphereLabels } from "../../data/sphere-labels";
 import { ParticleSphere } from "../../components/particle-sphere";
-import Image from "next/image";
 import { MemberCard } from "../../components/member-card";
 import { TeamEmblem } from "../../components/team-emblem";
 import { members, team, teamName } from "../../data/team";
@@ -206,23 +205,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
               {team.projects.map((project) => (
                 <article
                   key={project.title.ru}
-                  className="grid overflow-hidden rounded-2xl border border-line bg-panel sm:grid-cols-[1fr_2fr]"
+                  className="overflow-hidden rounded-2xl border border-line bg-panel"
                 >
-                  <div className="relative min-h-44 overflow-hidden bg-panel sm:min-h-64">
-                    <Image
-                      src={project.image}
-                      alt={project.imageAlt[lang]}
-                      fill
-                      sizes="(max-width: 639px) 100vw, 40vw"
-                      className="object-cover object-top"
-                    />
-                    {project.brand === "dobropay" && (
-                      <div aria-hidden="true" className="project-brand">
-                        <span className="project-brand-mark" />
-                        <span>dobropay</span>
-                      </div>
-                    )}
-                  </div>
                   <div className="flex flex-col items-start justify-center p-6 md:p-10">
                     <span className="meta text-lilac">{t[project.kind]}</span>
                     <h3 className="mt-3 text-3xl font-medium tracking-tight">
