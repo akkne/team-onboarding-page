@@ -111,7 +111,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           aria-labelledby="hero-title"
           className="hero relative isolate overflow-hidden border-b border-line"
         >
-          <ParticleSphere labels={getSphereLabels(lang)} />
+          <ParticleSphere labels={getSphereLabels()} />
           <div className="shell pointer-events-none relative flex min-h-[36rem] flex-col items-start pt-12 pb-44 sm:min-h-[40rem] md:justify-center md:py-24 [&>*]:pointer-events-auto lg:min-h-[clamp(38rem,74svh,54rem)]">
             <p className="meta mb-7 flex flex-wrap items-center gap-3 text-mint">
               <span>
@@ -172,19 +172,18 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             <h2 id="skills-title" className="section-title">
               {t.skills}
             </h2>
-            <dl className="divide-y divide-line border-y border-line">
+            <dl lang="en" className="divide-y divide-line border-y border-line">
               {team.skills.map(({ category, items }) => (
                 <div
-                  key={category.ru}
+                  key={category}
                   className="grid gap-3 py-6 sm:grid-cols-[9rem_1fr]"
                 >
-                  <dt className="meta text-mint">{category[lang]}</dt>
+                  <dt className="meta text-mint">{category}</dt>
                   <dd>
                     <ul className="flex flex-wrap gap-x-6 gap-y-1 text-lg tracking-tight md:text-xl">
-                      {items.map((item) => {
-                        const label = typeof item === "string" ? item : item[lang];
-                        return <li key={label}>{label}</li>;
-                      })}
+                      {items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
                     </ul>
                   </dd>
                 </div>

@@ -1,8 +1,5 @@
-import { team, type Locale } from "./team";
+import { team } from "./team";
 
-export function getSphereLabels(lang: Locale): string[] {
-  const names = team.skills.flatMap(({ items }) =>
-    items.map((item) => typeof item === "string" ? item : item[lang]),
-  );
-  return [...new Set(names)];
+export function getSphereLabels(): string[] {
+  return [...new Set(team.skills.flatMap(({ items }) => items))];
 }
