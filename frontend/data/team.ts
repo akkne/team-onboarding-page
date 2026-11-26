@@ -45,6 +45,15 @@ export const team = {
       kind: "project",
       href: repository,
     },
+    {
+      title: { ru: "Dobropay", en: "Dobropay" },
+      description: {
+        ru: "Платёжный шлюз с кабинетом магазина и документацией API на .NET 10 и Next.js. Интеграции с реальными платёжными провайдерами пока не реализованы.",
+        en: "A .NET 10 and Next.js payment gateway with a merchant dashboard and API documentation. Integrations with real payment providers are not implemented yet.",
+      },
+      kind: "project",
+      href: "https://github.com/akkne/dobropay",
+    },
   ] as Project[],
   skills: [
     { category: { ru: "Языки", en: "Languages" }, items: ["TypeScript"] },
